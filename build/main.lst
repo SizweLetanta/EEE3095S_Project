@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   31:Core/Src/main.c **** 
   32:Core/Src/main.c **** /* USER CODE END PTD */
   33:Core/Src/main.c **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 2
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 2
 
 
   34:Core/Src/main.c **** /* Private define ------------------------------------------------------------*/
@@ -73,21 +73,21 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   43:Core/Src/main.c **** 
   44:Core/Src/main.c **** /* Private variables ---------------------------------------------------------*/
   45:Core/Src/main.c **** ADC_HandleTypeDef hadc;
-  46:Core/Src/main.c **** TIM_HandleTypeDef htim3;
-  47:Core/Src/main.c **** 
-  48:Core/Src/main.c **** /* USER CODE BEGIN PV */
-  49:Core/Src/main.c **** uint32_t prev_millis = 0;
-  50:Core/Src/main.c **** uint32_t curr_millis = 0;
-  51:Core/Src/main.c **** uint32_t delay_t = 1000;	 // Initialise delay to 500ms
-  52:Core/Src/main.c **** uint32_t adc_val;
-  53:Core/Src/main.c **** /* USER CODE END PV */
-  54:Core/Src/main.c **** 
-  55:Core/Src/main.c **** /* Private function prototypes -----------------------------------------------*/
-  56:Core/Src/main.c **** void SystemClock_Config(void);
-  57:Core/Src/main.c **** static void MX_GPIO_Init(void);
-  58:Core/Src/main.c **** static void MX_ADC_Init(void);
-  59:Core/Src/main.c **** static void MX_TIM3_Init(void);
-  60:Core/Src/main.c **** 
+  46:Core/Src/main.c **** 
+  47:Core/Src/main.c **** TIM_HandleTypeDef htim3;
+  48:Core/Src/main.c **** 
+  49:Core/Src/main.c **** /* USER CODE BEGIN PV */
+  50:Core/Src/main.c **** uint32_t prev_millis = 0;
+  51:Core/Src/main.c **** uint32_t curr_millis = 0;
+  52:Core/Src/main.c **** uint32_t delay_t = 1000;  // Initialise delay to 500ms
+  53:Core/Src/main.c **** uint32_t adc_val;
+  54:Core/Src/main.c **** /* USER CODE END PV */
+  55:Core/Src/main.c **** 
+  56:Core/Src/main.c **** /* Private function prototypes -----------------------------------------------*/
+  57:Core/Src/main.c **** void SystemClock_Config(void);
+  58:Core/Src/main.c **** static void MX_GPIO_Init(void);
+  59:Core/Src/main.c **** static void MX_ADC_Init(void);
+  60:Core/Src/main.c **** static void MX_TIM3_Init(void);
   61:Core/Src/main.c **** /* USER CODE BEGIN PFP */
   62:Core/Src/main.c **** void EXTI0_1_IRQHandler(void);
   63:Core/Src/main.c **** void writeLCD(char* char_in);
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   88:Core/Src/main.c **** 
   89:Core/Src/main.c **** 	/* Configure the system clock */
   90:Core/Src/main.c **** 	SystemClock_Config();
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 3
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 3
 
 
   91:Core/Src/main.c **** 
@@ -129,16 +129,16 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   96:Core/Src/main.c **** 	MX_GPIO_Init();
   97:Core/Src/main.c **** 	MX_ADC_Init();
   98:Core/Src/main.c **** 	MX_TIM3_Init();
-  99:Core/Src/main.c **** 
- 100:Core/Src/main.c **** 	/* USER CODE BEGIN 2 */
- 101:Core/Src/main.c **** 	init_LCD();
- 102:Core/Src/main.c **** 
- 103:Core/Src/main.c **** 	// PWM setup
- 104:Core/Src/main.c **** 	uint32_t CCR = 0;
- 105:Core/Src/main.c **** 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);  // Start PWM on TIM3 Channel 3
- 106:Core/Src/main.c **** 	HAL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_0);
- 107:Core/Src/main.c **** 
- 108:Core/Src/main.c **** 	/* USER CODE END 2 */
+  99:Core/Src/main.c **** 	/* USER CODE BEGIN 2 */
+ 100:Core/Src/main.c **** 	init_LCD();
+ 101:Core/Src/main.c **** 
+ 102:Core/Src/main.c **** 	// PWM setup
+ 103:Core/Src/main.c **** 	uint32_t CCR = 0;
+ 104:Core/Src/main.c **** 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);  // Start PWM on TIM3 Channel 3
+ 105:Core/Src/main.c **** 	HAL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_0);
+ 106:Core/Src/main.c **** 
+ 107:Core/Src/main.c **** 	/* USER CODE END 2 */
+ 108:Core/Src/main.c **** 
  109:Core/Src/main.c **** 	/* Infinite loop */
  110:Core/Src/main.c **** 	/* USER CODE BEGIN WHILE */
  111:Core/Src/main.c **** 	while (1) {
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  145:Core/Src/main.c **** 	/* Wait till HSI is ready */
  146:Core/Src/main.c **** 	while (LL_RCC_HSI_IsReady() != 1) {
  147:Core/Src/main.c **** 	}
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 4
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 4
 
 
  148:Core/Src/main.c **** 	LL_RCC_HSI_SetCalibTrimming(16);
@@ -238,13 +238,13 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  202:Core/Src/main.c **** 	if (HAL_ADC_Init(&hadc) != HAL_OK) {
  203:Core/Src/main.c **** 		Error_Handler();
  204:Core/Src/main.c **** 	}
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 5
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 5
 
 
  205:Core/Src/main.c **** 
  206:Core/Src/main.c **** 	/** Configure for the selected ADC regular channel to be converted.
  207:Core/Src/main.c **** 	 */
- 208:Core/Src/main.c **** 	sConfig.Channel = ADC_CHANNEL_6;
+ 208:Core/Src/main.c **** 	sConfig.Channel = ADC_CHANNEL_7;
  209:Core/Src/main.c **** 	sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
  210:Core/Src/main.c **** 	sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
  211:Core/Src/main.c **** 	if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  259:Core/Src/main.c **** 	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK) {
  260:Core/Src/main.c **** 		Error_Handler();
  261:Core/Src/main.c **** 	}
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 6
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 6
 
 
  262:Core/Src/main.c **** 	sConfigOC.OCMode = TIM_OCMODE_PWM1;
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  284:Core/Src/main.c **** 	/* USER CODE END MX_GPIO_Init_1 */
  285:Core/Src/main.c **** 
  286:Core/Src/main.c **** 	/* GPIO Ports Clock Enable */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 7
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 7
 
 
  287:Core/Src/main.c **** 	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF);
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   50:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #if defined(RCC)
   51:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** 
   52:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** /** @defgroup BUS_LL BUS
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 8
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 8
 
 
   53:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h ****   * @{
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  107:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #endif /*TIM6*/
  108:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #if defined(TIM7)
  109:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_TIM7           RCC_APB1ENR_TIM7EN
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 9
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 9
 
 
  110:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #endif /*TIM7*/
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  164:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #if defined(USART6)
  165:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #define LL_APB1_GRP2_PERIPH_USART6         RCC_APB2ENR_USART6EN
  166:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #endif /*USART6*/
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 10
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 10
 
 
  167:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** #define LL_APB1_GRP2_PERIPH_TIM1           RCC_APB2ENR_TIM1EN
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  221:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h ****   *
  222:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h ****   *         (*) value not defined in all devices.
  223:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h ****   * @retval None
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 11
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 11
 
 
  224:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_bus.h **** */
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  101 0040 0292     		str	r2, [sp, #8]
  102              		.loc 2 231 3 is_stmt 1 view .LVU21
  103 0042 029A     		ldr	r2, [sp, #8]
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 12
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 12
 
 
  104              	.LVL3:
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   13:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * in the root directory of this software component.
   14:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * If no LICENSE file comes with this software, it is provided AS-IS.
   15:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 13
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 13
 
 
   16:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   ******************************************************************************
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   70:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** 
   71:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
   72:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 14
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 14
 
 
   73:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   uint32_t Speed;        /*!< Specifies the speed for the selected pins.
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  127:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****                                            GPIO_BSRR_BS_12 | GPIO_BSRR_BS_13 | GPIO_BSRR_BS_14 | \
  128:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****                                            GPIO_BSRR_BS_15) /*!< Select all pins */
  129:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** /**
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 15
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 15
 
 
  130:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @}
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  184:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** #define LL_GPIO_AF_5                       (0x0000005U) /*!< Select alternate function 5 */
  185:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** #define LL_GPIO_AF_6                       (0x0000006U) /*!< Select alternate function 6 */
  186:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** #define LL_GPIO_AF_7                       (0x0000007U) /*!< Select alternate function 7 */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 16
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 16
 
 
  187:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** /**
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  241:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @rmtoll MODER        MODEy         LL_GPIO_SetPinMode
  242:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
  243:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 17
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 17
 
 
  244:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  298:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ALTERNATE
  299:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ANALOG
  300:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 18
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 18
 
 
  301:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinMode(GPIO_TypeDef *GPIOx, uint32_t Pin)
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  355:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
  356:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
  357:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 19
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 19
 
 
  358:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
@@ -1138,7 +1138,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  412:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @note   I/O speed can be Low, Medium, Fast or High speed.
  413:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
  414:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @note   Refer to datasheet for frequency specifications and the power
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 20
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 20
 
 
  415:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         supply and load conditions for each speed.
@@ -1198,7 +1198,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  469:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_UP
  470:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_DOWN
  471:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @retval None
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 21
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 21
 
 
  472:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   */
@@ -1258,7 +1258,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  526:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_0
  527:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_1
  528:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_2
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 22
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 22
 
 
  529:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_3
@@ -1318,7 +1318,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  583:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
  584:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  585:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 23
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 23
 
 
  586:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @param  Alternate This parameter can be one of the following values:
@@ -1378,7 +1378,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  640:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @note   Each lock bit freezes a specific configuration register
  641:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         (control and alternate function registers).
  642:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @rmtoll LCKR         LCKK          LL_GPIO_LockPin
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 24
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 24
 
 
  643:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
@@ -1438,7 +1438,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  697:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   */
  698:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsPinLocked(GPIO_TypeDef *GPIOx, uint32_t PinMask)
  699:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** {
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 25
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 25
 
 
  700:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   return (READ_BIT(GPIOx->LCKR, PinMask) == (PinMask));
@@ -1498,7 +1498,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  754:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
  755:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
  756:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 26
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 26
 
 
  757:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsInputPinSet(GPIO_TypeDef *GPIOx, uint32_t PinMask)
@@ -1558,7 +1558,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  811:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   return (READ_BIT(GPIOx->ODR, PinMask) == (PinMask));
  812:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** }
  813:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 27
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 27
 
 
  814:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** /**
@@ -1618,7 +1618,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  136              		.loc 3 867 22 view .LVU33
  137              	.LBB51:
  868:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h **** {
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 28
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 28
 
 
  869:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_gpio.h ****   WRITE_REG(GPIOx->BRR, PinMask);
@@ -1678,7 +1678,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   38:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
   39:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /* Includes ------------------------------------------------------------------*/
   40:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #include "stm32f0xx.h"
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 29
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 29
 
 
   41:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
@@ -1738,7 +1738,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   95:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_CFGR1_USART1TX_DMA_RMP) || defined(SYSCFG_CFGR1_USART1RX_DMA_RMP) || defined(SYS
   96:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /** @defgroup SYSTEM_LL_EC_USART1TX_RMP SYSCFG USART DMA Remap
   97:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @{
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 30
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 30
 
 
   98:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
@@ -1798,7 +1798,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  152:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
  153:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
  154:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_CFGR1_ADC_DMA_RMP */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 31
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 31
 
 
  155:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
@@ -1858,7 +1858,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  209:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #define LL_SYSCFG_I2C_FASTMODEPLUS_I2C2    SYSCFG_CFGR1_I2C_FMP_I2C2 /*!< Enable I2C2 Fast mode plu
  210:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /*SYSCFG_CFGR1_I2C_FMP_I2C2*/
  211:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_CFGR1_I2C_FMP_PA9)
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 32
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 32
 
 
  212:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #define LL_SYSCFG_I2C_FASTMODEPLUS_PA9     SYSCFG_CFGR1_I2C_FMP_PA9 /*!< Enable Fast Mode Plus on P
@@ -1918,7 +1918,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  266:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****                                                                        with TIM1/15/16U/17 Break In
  267:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****                                                                        the PVDE and PLS bits of the
  268:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /*SYSCFG_CFGR2_PVD_LOCK*/
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 33
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 33
 
 
  269:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #define LL_SYSCFG_TIMBREAK_SRAM_PARITY     SYSCFG_CFGR2_SRAM_PARITY_LOCK   /*!< Enables and locks t
@@ -1978,7 +1978,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  323:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
  324:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
  325:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @}
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 34
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 34
 
 
  326:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
@@ -2038,7 +2038,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  380:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
  381:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
  382:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Get IR Modulation Envelope signal source.
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 35
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 35
 
 
  383:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_CFGR1 IR_MOD  LL_SYSCFG_GetIRModEnvelopeSignal
@@ -2098,7 +2098,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  437:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
  438:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Set DMA request remapping bits for I2C
  439:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_CFGR1 I2C1_DMA_RMP  LL_SYSCFG_SetRemapDMA_I2C
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 36
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 36
 
 
  440:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @param  Remap This parameter can be one of the following values:
@@ -2158,7 +2158,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  494:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
  495:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   MODIFY_REG(SYSCFG->CFGR1, (Remap & 0x00FF00FFU) << 8U, (Remap & 0xFF00FF00U));
  496:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 37
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 37
 
 
  497:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_CFGR1_TIM16_DMA_RMP || SYSCFG_CFGR1_TIM17_DMA_RMP || SYSCFG_CFGR1_TIM1_DMA_RMP || 
@@ -2218,7 +2218,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  551:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
  552:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Disable the I2C fast mode plus driving capability.
  553:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_CFGR1 I2C_FMP_PB6   LL_SYSCFG_DisableFastModePlus\n
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 38
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 38
 
 
  554:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         SYSCFG_CFGR1 I2C_FMP_PB7   LL_SYSCFG_DisableFastModePlus\n
@@ -2278,7 +2278,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  608:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_SYSCFG_EXTI_LINE1
  609:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_SYSCFG_EXTI_LINE2
  610:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_SYSCFG_EXTI_LINE3
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 39
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 39
 
 
  611:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_SYSCFG_EXTI_LINE4
@@ -2338,7 +2338,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  300:Core/Src/main.c **** 	/**/
  301:Core/Src/main.c **** 	LL_GPIO_SetPinMode(Button0_GPIO_Port, Button0_Pin, LL_GPIO_MODE_INPUT);
  181              		.loc 1 301 2 is_stmt 1 view .LVU44
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 40
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 40
 
 
  182              	.LBB56:
@@ -2398,7 +2398,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  314:Core/Src/main.c **** 	GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
  221              		.loc 1 314 2 is_stmt 1 view .LVU63
  222              		.loc 1 314 29 is_stmt 0 view .LVU64
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 41
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 41
 
 
  223 0096 0796     		str	r6, [sp, #28]
@@ -2458,7 +2458,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
    4:Core/Inc/lcd_stm32f0.c **** //*==================================================================*
    5:Core/Inc/lcd_stm32f0.c **** //* WRITTEN BY:    Copyright (C) Samuel Ginsberg 2004                *
    6:Core/Inc/lcd_stm32f0.c **** //* PORTED TO STM32F0 dev board by James Gowans, 2014                *
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 42
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 42
 
 
    7:Core/Inc/lcd_stm32f0.c **** //* MODIFIED BY:   Robyn Verrinder                                   *
@@ -2518,7 +2518,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   61:Core/Inc/lcd_stm32f0.c **** //                  - POWER_UP:      Power up initialization for the lcd
   62:Core/Inc/lcd_stm32f0.c **** //                  - FOURBIT_MODE:  Sets LCD for 4-bit mode
   63:Core/Inc/lcd_stm32f0.c **** //                  - TWOLINE_MODE:  Sets up 2 lines and character size
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 43
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 43
 
 
   64:Core/Inc/lcd_stm32f0.c **** //                  - SETUP_CURSOR:  Turn display on and set up cursor
@@ -2578,7 +2578,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  118:Core/Inc/lcd_stm32f0.c ****     	GPIOA->BSRR |= LCD_D7_SET;
  119:Core/Inc/lcd_stm32f0.c ****     }
  120:Core/Inc/lcd_stm32f0.c ****     else				// else RESET D7
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 44
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 44
 
 
  121:Core/Inc/lcd_stm32f0.c ****     {
@@ -2638,7 +2638,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  175:Core/Inc/lcd_stm32f0.c ****     GPIOC->MODER |= (GPIO_MODER_MODER14_0|GPIO_MODER_MODER15_0); // RS and EN
  176:Core/Inc/lcd_stm32f0.c **** 
  177:Core/Inc/lcd_stm32f0.c ****     delay(30000);			// Allow the LCD some power up time (~30ms)
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 45
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 45
 
 
  178:Core/Inc/lcd_stm32f0.c **** 
@@ -2698,7 +2698,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  232:Core/Inc/lcd_stm32f0.c ****         if ((character & 0x10) != 0)	// Select bit 4 of command, if HIGH set Data line 4 (D4) 
  233:Core/Inc/lcd_stm32f0.c ****         {
  234:Core/Inc/lcd_stm32f0.c ****         	GPIOB->BSRR |= LCD_D4_SET;
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 46
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 46
 
 
  235:Core/Inc/lcd_stm32f0.c ****         }
@@ -2758,7 +2758,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  289:Core/Inc/lcd_stm32f0.c **** 
  290:Core/Inc/lcd_stm32f0.c **** void lcd_putstring(char *instring)
  291:Core/Inc/lcd_stm32f0.c **** {
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 47
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 47
 
 
  292:Core/Inc/lcd_stm32f0.c ****     unsigned char count = 0;
@@ -2818,7 +2818,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  280 0004 1818     		adds	r0, r3, r0
  281              	.LVL14:
  334:Core/Inc/lcd_stm32f0.c **** 	  for(counter = 0; counter<microseconds; counter++)
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 48
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 48
 
 
  282              		.loc 5 334 4 is_stmt 1 view .LVU76
@@ -2878,7 +2878,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  330              		.cfi_def_cfa_offset 16
  331              		.cfi_offset 4, -16
  332              		.cfi_offset 5, -12
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 49
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 49
 
 
  333              		.cfi_offset 6, -8
@@ -2938,7 +2938,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  374 0032 C046     		.align	2
  375              	.L8:
  376 0034 00080048 		.word	1207961600
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 50
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 50
 
 
  377              		.cfi_endproc
@@ -2998,7 +2998,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  422 001e 1B06     		lsls	r3, r3, #24
  423 0020 0B43     		orrs	r3, r1
  424 0022 9361     		str	r3, [r2, #24]
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 51
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 51
 
 
  425              	.L12:
@@ -3058,7 +3058,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  464 004e 8023     		movs	r3, #128
  465 0050 5B00     		lsls	r3, r3, #1
  466 0052 0B43     		orrs	r3, r1
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 52
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 52
 
 
  467 0054 9361     		str	r3, [r2, #24]
@@ -3118,7 +3118,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  265:Core/Inc/lcd_stm32f0.c **** 	}
  507              		.loc 5 265 15 is_stmt 0 view .LVU138
  508 0082 274A     		ldr	r2, .L28+4
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 53
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 53
 
 
  509 0084 9169     		ldr	r1, [r2, #24]
@@ -3178,7 +3178,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  219:Core/Inc/lcd_stm32f0.c ****         }
  551              		.loc 5 219 18 is_stmt 0 view .LVU151
  552 00b4 9022     		movs	r2, #144
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 54
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 54
 
 
  553 00b6 D205     		lsls	r2, r2, #23
@@ -3238,7 +3238,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  260:Core/Inc/lcd_stm32f0.c ****         }
  597              		.loc 5 260 13 is_stmt 1 view .LVU162
  260:Core/Inc/lcd_stm32f0.c ****         }
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 55
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 55
 
 
  598              		.loc 5 260 18 is_stmt 0 view .LVU163
@@ -3298,7 +3298,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  647              	.LFB349:
  291:Core/Inc/lcd_stm32f0.c ****     unsigned char count = 0;
  648              		.loc 5 291 1 is_stmt 1 view -0
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 56
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 56
 
 
  649              		.cfi_startproc
@@ -3358,7 +3358,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  299:Core/Inc/lcd_stm32f0.c **** 
  690              		.loc 5 299 1 view .LVU185
  691 0016 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 57
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 57
 
 
  692              		.cfi_endproc
@@ -3418,7 +3418,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  737 001e 1B06     		lsls	r3, r3, #24
  738 0020 0B43     		orrs	r3, r1
  739 0022 9361     		str	r3, [r2, #24]
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 58
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 58
 
 
  740              	.L35:
@@ -3478,7 +3478,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  779 004e 8023     		movs	r3, #128
  780 0050 5B00     		lsls	r3, r3, #1
  781 0052 0B43     		orrs	r3, r1
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 59
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 59
 
 
  782 0054 9361     		str	r3, [r2, #24]
@@ -3538,7 +3538,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  136:Core/Inc/lcd_stm32f0.c ****     }
  822              		.loc 5 136 11 is_stmt 0 view .LVU226
  823 0082 294A     		ldr	r2, .L51+4
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 60
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 60
 
 
  824 0084 9169     		ldr	r1, [r2, #24]
@@ -3598,7 +3598,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  866 00b6 9361     		str	r3, [r2, #24]
  867 00b8 B4E7     		b	.L35
  868              	.L36:
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 61
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 61
 
 
   92:Core/Inc/lcd_stm32f0.c ****     }
@@ -3658,7 +3658,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  911 00ee 1B06     		lsls	r3, r3, #24
  912 00f0 0B43     		orrs	r3, r1
  913 00f2 9361     		str	r3, [r2, #24]
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 62
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 62
 
 
  914 00f4 BAE7     		b	.L43
@@ -3718,7 +3718,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  960              		.global	init_LCD
  961              		.syntax unified
  962              		.code	16
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 63
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 63
 
 
  963              		.thumb_func
@@ -3778,7 +3778,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1005              		.loc 5 173 18 view .LVU272
  1006 0028 8223     		movs	r3, #130
  1007 002a DB05     		lsls	r3, r3, #23
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 64
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 64
 
 
  1008 002c 0B43     		orrs	r3, r1
@@ -3838,7 +3838,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1050 0068 FFF7FEFF 		bl	lcd_command
  1051              	.LVL42:
  184:Core/Inc/lcd_stm32f0.c **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 65
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 65
 
 
  1052              		.loc 5 184 1 is_stmt 0 view .LVU285
@@ -3898,7 +3898,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1097              		.loc 1 333 3 is_stmt 1 view .LVU293
  1098              		.loc 1 333 15 is_stmt 0 view .LVU294
  1099 0014 0D4B     		ldr	r3, .L61+8
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 66
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 66
 
 
  1100 0016 1A68     		ldr	r2, [r3]
@@ -3917,7 +3917,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1110 0024 5200     		lsls	r2, r2, #1
  1111 0026 1A60     		str	r2, [r3]
  1112              	.L59:
- 337:Core/Src/main.c **** 			
+ 337:Core/Src/main.c **** 
  338:Core/Src/main.c **** 		prev_millis = HAL_GetTick();
  1113              		.loc 1 338 3 is_stmt 1 view .LVU298
  1114              		.loc 1 338 17 is_stmt 0 view .LVU299
@@ -3927,17 +3927,15 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1118 002c 064B     		ldr	r3, .L61+4
  1119 002e 1860     		str	r0, [r3]
  1120              	.L57:
- 339:Core/Src/main.c ****  	}
+ 339:Core/Src/main.c **** 	}
  340:Core/Src/main.c **** 
- 341:Core/Src/main.c **** 
- 342:Core/Src/main.c **** 
- 343:Core/Src/main.c **** 	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
- 1121              		.loc 1 343 2 is_stmt 1 view .LVU301
+ 341:Core/Src/main.c **** 	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
+ 1121              		.loc 1 341 2 is_stmt 1 view .LVU301
  1122 0030 0120     		movs	r0, #1
  1123 0032 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
  1124              	.LVL45:
- 344:Core/Src/main.c **** }
- 1125              		.loc 1 344 1 is_stmt 0 view .LVU302
+ 342:Core/Src/main.c **** }
+ 1125              		.loc 1 342 1 is_stmt 0 view .LVU302
  1126              		@ sp needed
  1127 0036 10BD     		pop	{r4, pc}
  1128              	.L60:
@@ -3958,11 +3956,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1141 004c 00000000 		.word	delay_t
  1142              		.cfi_endproc
  1143              	.LFE357:
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 67
-
-
  1145              		.section	.text.writeLCD,"ax",%progbits
  1146              		.align	1
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 67
+
+
  1147              		.global	writeLCD
  1148              		.syntax unified
  1149              		.code	16
@@ -3970,41 +3968,41 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1152              	writeLCD:
  1153              	.LVL46:
  1154              	.LFB358:
- 345:Core/Src/main.c **** 
- 346:Core/Src/main.c **** // TODO: Complete the writeLCD function
- 347:Core/Src/main.c **** void writeLCD(char* char_in) {
- 1155              		.loc 1 347 30 is_stmt 1 view -0
+ 343:Core/Src/main.c **** 
+ 344:Core/Src/main.c **** // TODO: Complete the writeLCD function
+ 345:Core/Src/main.c **** void writeLCD(char* char_in) {
+ 1155              		.loc 1 345 30 is_stmt 1 view -0
  1156              		.cfi_startproc
  1157              		@ args = 0, pretend = 0, frame = 0
  1158              		@ frame_needed = 0, uses_anonymous_args = 0
- 1159              		.loc 1 347 30 is_stmt 0 view .LVU306
+ 1159              		.loc 1 345 30 is_stmt 0 view .LVU306
  1160 0000 10B5     		push	{r4, lr}
  1161              		.cfi_def_cfa_offset 8
  1162              		.cfi_offset 4, -8
  1163              		.cfi_offset 14, -4
  1164 0002 0400     		movs	r4, r0
- 348:Core/Src/main.c **** 	lcd_command(CLEAR);		 // Clear display
- 1165              		.loc 1 348 2 is_stmt 1 view .LVU307
+ 346:Core/Src/main.c **** 	lcd_command(CLEAR);		 // Clear display
+ 1165              		.loc 1 346 2 is_stmt 1 view .LVU307
  1166 0004 0120     		movs	r0, #1
  1167              	.LVL47:
- 1168              		.loc 1 348 2 is_stmt 0 view .LVU308
+ 1168              		.loc 1 346 2 is_stmt 0 view .LVU308
  1169 0006 FFF7FEFF 		bl	lcd_command
  1170              	.LVL48:
- 349:Core/Src/main.c **** 	lcd_putstring(char_in);	 // write to display
- 1171              		.loc 1 349 2 is_stmt 1 view .LVU309
+ 347:Core/Src/main.c **** 	lcd_putstring(char_in);	 // write to display
+ 1171              		.loc 1 347 2 is_stmt 1 view .LVU309
  1172 000a 2000     		movs	r0, r4
  1173 000c FFF7FEFF 		bl	lcd_putstring
  1174              	.LVL49:
- 350:Core/Src/main.c **** 	delay(3000);			 // Delay
- 1175              		.loc 1 350 2 view .LVU310
+ 348:Core/Src/main.c **** 	delay(3000);			 // Delay
+ 1175              		.loc 1 348 2 view .LVU310
  1176 0010 0148     		ldr	r0, .L64
  1177 0012 FFF7FEFF 		bl	delay
  1178              	.LVL50:
- 351:Core/Src/main.c **** }
- 1179              		.loc 1 351 1 is_stmt 0 view .LVU311
+ 349:Core/Src/main.c **** }
+ 1179              		.loc 1 349 1 is_stmt 0 view .LVU311
  1180              		@ sp needed
  1181              	.LVL51:
- 1182              		.loc 1 351 1 view .LVU312
+ 1182              		.loc 1 349 1 view .LVU312
  1183 0016 10BD     		pop	{r4, pc}
  1184              	.L65:
  1185              		.align	2
@@ -4018,15 +4016,15 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1194              		.syntax unified
  1195              		.code	16
  1196              		.thumb_func
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 68
-
-
  1198              	pollADC:
  1199              	.LFB359:
- 352:Core/Src/main.c **** 
- 353:Core/Src/main.c **** // Get ADC value
- 354:Core/Src/main.c **** uint32_t pollADC(void) {
- 1200              		.loc 1 354 24 is_stmt 1 view -0
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 68
+
+
+ 350:Core/Src/main.c **** 
+ 351:Core/Src/main.c **** // Get ADC value
+ 352:Core/Src/main.c **** uint32_t pollADC(void) {
+ 1200              		.loc 1 352 24 is_stmt 1 view -0
  1201              		.cfi_startproc
  1202              		@ args = 0, pretend = 0, frame = 0
  1203              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -4036,36 +4034,36 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1207              		.cfi_offset 5, -12
  1208              		.cfi_offset 6, -8
  1209              		.cfi_offset 14, -4
- 355:Core/Src/main.c **** 	// TODO: Complete function body to get ADC val
- 356:Core/Src/main.c **** 	HAL_ADC_Start(&hadc);					 // Start sampling
- 1210              		.loc 1 356 2 view .LVU314
+ 353:Core/Src/main.c **** 	// TODO: Complete function body to get ADC val
+ 354:Core/Src/main.c **** 	HAL_ADC_Start(&hadc);					 // Start sampling
+ 1210              		.loc 1 354 2 view .LVU314
  1211 0002 064D     		ldr	r5, .L67
  1212 0004 2800     		movs	r0, r5
  1213 0006 FFF7FEFF 		bl	HAL_ADC_Start
  1214              	.LVL52:
- 357:Core/Src/main.c **** 	uint32_t val = HAL_ADC_GetValue(&hadc);	 // Get ADC value
- 1215              		.loc 1 357 2 view .LVU315
- 1216              		.loc 1 357 17 is_stmt 0 view .LVU316
+ 355:Core/Src/main.c **** 	uint32_t val = HAL_ADC_GetValue(&hadc);	 // Get ADC value
+ 1215              		.loc 1 355 2 view .LVU315
+ 1216              		.loc 1 355 17 is_stmt 0 view .LVU316
  1217 000a 2800     		movs	r0, r5
  1218 000c FFF7FEFF 		bl	HAL_ADC_GetValue
  1219              	.LVL53:
  1220 0010 0400     		movs	r4, r0
  1221              	.LVL54:
- 358:Core/Src/main.c **** 	HAL_ADC_Stop(&hadc);					 // Stop sampling
- 1222              		.loc 1 358 2 is_stmt 1 view .LVU317
+ 356:Core/Src/main.c **** 	HAL_ADC_Stop(&hadc);					 // Stop sampling
+ 1222              		.loc 1 356 2 is_stmt 1 view .LVU317
  1223 0012 2800     		movs	r0, r5
  1224              	.LVL55:
- 1225              		.loc 1 358 2 is_stmt 0 view .LVU318
+ 1225              		.loc 1 356 2 is_stmt 0 view .LVU318
  1226 0014 FFF7FEFF 		bl	HAL_ADC_Stop
  1227              	.LVL56:
- 359:Core/Src/main.c **** 	return val;
- 1228              		.loc 1 359 2 is_stmt 1 view .LVU319
- 360:Core/Src/main.c **** }
- 1229              		.loc 1 360 1 is_stmt 0 view .LVU320
+ 357:Core/Src/main.c **** 	return val;
+ 1228              		.loc 1 357 2 is_stmt 1 view .LVU319
+ 358:Core/Src/main.c **** }
+ 1229              		.loc 1 358 1 is_stmt 0 view .LVU320
  1230 0018 2000     		movs	r0, r4
  1231              		@ sp needed
  1232              	.LVL57:
- 1233              		.loc 1 360 1 view .LVU321
+ 1233              		.loc 1 358 1 view .LVU321
  1234 001a 70BD     		pop	{r4, r5, r6, pc}
  1235              	.L68:
  1236              		.align	2
@@ -4078,52 +4076,52 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1244              		.global	__aeabi_fmul
  1245              		.global	__aeabi_f2uiz
  1246              		.section	.text.ADCtoCCR,"ax",%progbits
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 69
-
-
  1247              		.align	1
  1248              		.global	ADCtoCCR
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 69
+
+
  1249              		.syntax unified
  1250              		.code	16
  1251              		.thumb_func
  1253              	ADCtoCCR:
  1254              	.LVL58:
  1255              	.LFB360:
- 361:Core/Src/main.c **** 
- 362:Core/Src/main.c **** // Calculate PWM CCR value
- 363:Core/Src/main.c **** uint32_t ADCtoCCR(uint32_t adc_val) {
- 1256              		.loc 1 363 37 is_stmt 1 view -0
+ 359:Core/Src/main.c **** 
+ 360:Core/Src/main.c **** // Calculate PWM CCR value
+ 361:Core/Src/main.c **** uint32_t ADCtoCCR(uint32_t adc_val) {
+ 1256              		.loc 1 361 37 is_stmt 1 view -0
  1257              		.cfi_startproc
  1258              		@ args = 0, pretend = 0, frame = 0
  1259              		@ frame_needed = 0, uses_anonymous_args = 0
- 1260              		.loc 1 363 37 is_stmt 0 view .LVU323
+ 1260              		.loc 1 361 37 is_stmt 0 view .LVU323
  1261 0000 10B5     		push	{r4, lr}
  1262              		.cfi_def_cfa_offset 8
  1263              		.cfi_offset 4, -8
  1264              		.cfi_offset 14, -4
- 364:Core/Src/main.c **** 	// TODO: Calculate CCR val using an appropriate equation
- 365:Core/Src/main.c **** 	float duty_cycle = ((float)adc_val) / 4095.0f;	// Percentage of time the LED is on
- 1265              		.loc 1 365 2 is_stmt 1 view .LVU324
- 1266              		.loc 1 365 22 is_stmt 0 view .LVU325
+ 362:Core/Src/main.c **** 	// TODO: Calculate CCR val using an appropriate equation
+ 363:Core/Src/main.c **** 	float duty_cycle = ((float)adc_val) / 4095.0f;	// Percentage of time the LED is on
+ 1265              		.loc 1 363 2 is_stmt 1 view .LVU324
+ 1266              		.loc 1 363 22 is_stmt 0 view .LVU325
  1267 0002 FFF7FEFF 		bl	__aeabi_ui2f
  1268              	.LVL59:
- 1269              		.loc 1 365 8 view .LVU326
+ 1269              		.loc 1 363 8 view .LVU326
  1270 0006 0449     		ldr	r1, .L70
  1271 0008 FFF7FEFF 		bl	__aeabi_fdiv
  1272              	.LVL60:
- 366:Core/Src/main.c **** 	uint32_t val = duty_cycle * 47999;				// The CRR value
- 1273              		.loc 1 366 2 is_stmt 1 view .LVU327
- 1274              		.loc 1 366 28 is_stmt 0 view .LVU328
+ 364:Core/Src/main.c **** 	uint32_t val = duty_cycle * 47999;				// The CRR value
+ 1273              		.loc 1 364 2 is_stmt 1 view .LVU327
+ 1274              		.loc 1 364 28 is_stmt 0 view .LVU328
  1275 000c 0349     		ldr	r1, .L70+4
  1276 000e FFF7FEFF 		bl	__aeabi_fmul
  1277              	.LVL61:
- 1278              		.loc 1 366 11 view .LVU329
+ 1278              		.loc 1 364 11 view .LVU329
  1279 0012 FFF7FEFF 		bl	__aeabi_f2uiz
  1280              	.LVL62:
- 367:Core/Src/main.c **** 	return val;
- 1281              		.loc 1 367 2 is_stmt 1 view .LVU330
- 368:Core/Src/main.c **** }
- 1282              		.loc 1 368 1 is_stmt 0 view .LVU331
+ 365:Core/Src/main.c **** 	return val;
+ 1281              		.loc 1 365 2 is_stmt 1 view .LVU330
+ 366:Core/Src/main.c **** }
+ 1282              		.loc 1 366 1 is_stmt 0 view .LVU331
  1283              		@ sp needed
  1284 0016 10BD     		pop	{r4, pc}
  1285              	.L71:
@@ -4138,15 +4136,15 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1295              		.global	ADC1_COMP_IRQHandler
  1296              		.syntax unified
  1297              		.code	16
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 70
-
-
  1298              		.thumb_func
  1300              	ADC1_COMP_IRQHandler:
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 70
+
+
  1301              	.LFB361:
- 369:Core/Src/main.c **** 
- 370:Core/Src/main.c **** void ADC1_COMP_IRQHandler(void) {
- 1302              		.loc 1 370 33 is_stmt 1 view -0
+ 367:Core/Src/main.c **** 
+ 368:Core/Src/main.c **** void ADC1_COMP_IRQHandler(void) {
+ 1302              		.loc 1 368 33 is_stmt 1 view -0
  1303              		.cfi_startproc
  1304              		@ args = 0, pretend = 0, frame = 0
  1305              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -4154,23 +4152,23 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1307              		.cfi_def_cfa_offset 8
  1308              		.cfi_offset 4, -8
  1309              		.cfi_offset 14, -4
- 371:Core/Src/main.c **** 	adc_val = HAL_ADC_GetValue(&hadc);	// read adc value
- 1310              		.loc 1 371 2 view .LVU333
- 1311              		.loc 1 371 12 is_stmt 0 view .LVU334
+ 369:Core/Src/main.c **** 	adc_val = HAL_ADC_GetValue(&hadc);	// read adc value
+ 1310              		.loc 1 369 2 view .LVU333
+ 1311              		.loc 1 369 12 is_stmt 0 view .LVU334
  1312 0002 054C     		ldr	r4, .L73
  1313 0004 2000     		movs	r0, r4
  1314 0006 FFF7FEFF 		bl	HAL_ADC_GetValue
  1315              	.LVL63:
- 1316              		.loc 1 371 10 view .LVU335
+ 1316              		.loc 1 369 10 view .LVU335
  1317 000a 044B     		ldr	r3, .L73+4
  1318 000c 1860     		str	r0, [r3]
- 372:Core/Src/main.c **** 	HAL_ADC_IRQHandler(&hadc);			// Clear flags
- 1319              		.loc 1 372 2 is_stmt 1 view .LVU336
+ 370:Core/Src/main.c **** 	HAL_ADC_IRQHandler(&hadc);			// Clear flags
+ 1319              		.loc 1 370 2 is_stmt 1 view .LVU336
  1320 000e 2000     		movs	r0, r4
  1321 0010 FFF7FEFF 		bl	HAL_ADC_IRQHandler
  1322              	.LVL64:
- 373:Core/Src/main.c **** }
- 1323              		.loc 1 373 1 is_stmt 0 view .LVU337
+ 371:Core/Src/main.c **** }
+ 1323              		.loc 1 371 1 is_stmt 0 view .LVU337
  1324              		@ sp needed
  1325 0014 10BD     		pop	{r4, pc}
  1326              	.L74:
@@ -4188,26 +4186,26 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1339              		.thumb_func
  1341              	Error_Handler:
  1342              	.LFB362:
- 374:Core/Src/main.c **** /* USER CODE END 4 */
- 375:Core/Src/main.c **** 
- 376:Core/Src/main.c **** /**
- 377:Core/Src/main.c ****  * @brief  This function is executed in case of error occurrence.
- 378:Core/Src/main.c ****  * @retval None
- 379:Core/Src/main.c ****  */
- 380:Core/Src/main.c **** void Error_Handler(void) {
- 1343              		.loc 1 380 26 is_stmt 1 view -0
+ 372:Core/Src/main.c **** /* USER CODE END 4 */
+ 373:Core/Src/main.c **** 
+ 374:Core/Src/main.c **** /**
+ 375:Core/Src/main.c ****  * @brief  This function is executed in case of error occurrence.
+ 376:Core/Src/main.c ****  * @retval None
+ 377:Core/Src/main.c ****  */
+ 378:Core/Src/main.c **** void Error_Handler(void) {
+ 1343              		.loc 1 378 26 is_stmt 1 view -0
  1344              		.cfi_startproc
  1345              		@ Volatile: function does not return.
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 71
-
-
  1346              		@ args = 0, pretend = 0, frame = 0
  1347              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 71
+
+
  1348              		@ link register save eliminated.
- 381:Core/Src/main.c **** 	/* USER CODE BEGIN Error_Handler_Debug */
- 382:Core/Src/main.c **** 	/* User can add his own implementation to report the HAL error return state */
- 383:Core/Src/main.c **** 	__disable_irq();
- 1349              		.loc 1 383 2 view .LVU339
+ 379:Core/Src/main.c **** 	/* USER CODE BEGIN Error_Handler_Debug */
+ 380:Core/Src/main.c **** 	/* User can add his own implementation to report the HAL error return state */
+ 381:Core/Src/main.c **** 	__disable_irq();
+ 1349              		.loc 1 381 2 view .LVU339
  1350              	.LBB58:
  1351              	.LBI58:
  1352              		.file 6 "Drivers/CMSIS/Include/cmsis_gcc.h"
@@ -4258,11 +4256,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   45:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
   47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 72
-
-
   48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   49:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 72
+
+
   50:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
   51:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif                                           
   52:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
@@ -4318,11 +4316,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  102:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
  103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
  104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 73
-
-
  105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
  106:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 73
+
+
  107:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
  108:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
  109:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
@@ -4371,18 +4369,18 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1362              	.L76:
  1363              	.LBE59:
  1364              	.LBE58:
- 384:Core/Src/main.c **** 	while (1) {
- 1365              		.loc 1 384 2 discriminator 1 view .LVU342
- 385:Core/Src/main.c **** 	}
- 1366              		.loc 1 385 2 discriminator 1 view .LVU343
- 384:Core/Src/main.c **** 	while (1) {
- 1367              		.loc 1 384 8 discriminator 1 view .LVU344
+ 382:Core/Src/main.c **** 	while (1) {
+ 1365              		.loc 1 382 2 discriminator 1 view .LVU342
+ 383:Core/Src/main.c **** 	}
+ 1366              		.loc 1 383 2 discriminator 1 view .LVU343
+ 382:Core/Src/main.c **** 	while (1) {
+ 1367              		.loc 1 382 8 discriminator 1 view .LVU344
  1368 0002 FEE7     		b	.L76
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 74
-
-
  1369              		.cfi_endproc
  1370              	.LFE362:
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 74
+
+
  1372              		.section	.text.MX_ADC_Init,"ax",%progbits
  1373              		.align	1
  1374              		.syntax unified
@@ -4438,11 +4436,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1412              		.loc 1 192 25 is_stmt 0 view .LVU357
  1413 001c 0122     		movs	r2, #1
  1414 001e 0261     		str	r2, [r0, #16]
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 75
-
-
  193:Core/Src/main.c **** 	hadc.Init.LowPowerAutoWait = DISABLE;
  1415              		.loc 1 193 2 is_stmt 1 view .LVU358
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 75
+
+
  193:Core/Src/main.c **** 	hadc.Init.LowPowerAutoWait = DISABLE;
  1416              		.loc 1 193 25 is_stmt 0 view .LVU359
  1417 0020 0421     		movs	r1, #4
@@ -4498,17 +4496,17 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1449 003c FFF7FEFF 		bl	HAL_ADC_Init
  1450              	.LVL66:
  202:Core/Src/main.c **** 		Error_Handler();
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 76
-
-
  1451              		.loc 1 202 5 view .LVU378
  1452 0040 0028     		cmp	r0, #0
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 76
+
+
  1453 0042 22D1     		bne	.L83
  208:Core/Src/main.c **** 	sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
  1454              		.loc 1 208 2 is_stmt 1 view .LVU379
  208:Core/Src/main.c **** 	sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
  1455              		.loc 1 208 18 is_stmt 0 view .LVU380
- 1456 0044 0623     		movs	r3, #6
+ 1456 0044 0723     		movs	r3, #7
  1457 0046 0193     		str	r3, [sp, #4]
  209:Core/Src/main.c **** 	sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
  1458              		.loc 1 209 2 is_stmt 1 view .LVU381
@@ -4558,11 +4556,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1490 006c 0A4B     		ldr	r3, .L85+4
  1491 006e 9B68     		ldr	r3, [r3, #8]
  216:Core/Src/main.c **** 		;				   // Calibrate the ADC
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 77
-
-
  1492              		.loc 1 216 9 discriminator 1 view .LVU394
  1493 0070 002B     		cmp	r3, #0
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 77
+
+
  1494 0072 FBDB     		blt	.L80
  218:Core/Src/main.c **** 	while ((ADC1->ISR & (1 << 0)) == 0)
  1495              		.loc 1 218 2 is_stmt 1 view .LVU395
@@ -4618,11 +4616,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1538              	MX_TIM3_Init:
  1539              	.LFB355:
  229:Core/Src/main.c **** 	/* USER CODE BEGIN TIM3_Init 0 */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 78
-
-
  1540              		.loc 1 229 32 view -0
  1541              		.cfi_startproc
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 78
+
+
  1542              		@ args = 0, pretend = 0, frame = 56
  1543              		@ frame_needed = 0, uses_anonymous_args = 0
  1544 0000 00B5     		push	{lr}
@@ -4678,11 +4676,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  244:Core/Src/main.c **** 	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
  1582              		.loc 1 244 2 is_stmt 1 view .LVU418
  244:Core/Src/main.c **** 	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 79
-
-
  1583              		.loc 1 244 20 is_stmt 0 view .LVU419
  1584 002e 1F4A     		ldr	r2, .L98+8
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 79
+
+
  1585 0030 C260     		str	r2, [r0, #12]
  245:Core/Src/main.c **** 	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
  1586              		.loc 1 245 2 is_stmt 1 view .LVU420
@@ -4738,11 +4736,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1621              		.loc 1 257 2 is_stmt 1 view .LVU435
  257:Core/Src/main.c **** 	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
  1622              		.loc 1 257 36 is_stmt 0 view .LVU436
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 80
-
-
  1623 005a 0023     		movs	r3, #0
  1624 005c 0893     		str	r3, [sp, #32]
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 80
+
+
  258:Core/Src/main.c **** 	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK) {
  1625              		.loc 1 258 2 is_stmt 1 view .LVU437
  258:Core/Src/main.c **** 	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK) {
@@ -4798,11 +4796,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  272:Core/Src/main.c **** }
  1661              		.loc 1 272 2 is_stmt 1 view .LVU453
  1662 0086 0748     		ldr	r0, .L98
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 81
-
-
  1663 0088 FFF7FEFF 		bl	HAL_TIM_MspPostInit
  1664              	.LVL78:
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 81
+
+
  273:Core/Src/main.c **** 
  1665              		.loc 1 273 1 is_stmt 0 view .LVU454
  1666 008c 0FB0     		add	sp, sp, #60
@@ -4858,11 +4856,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1712              		.cfi_def_cfa_offset 8
  1713              		.cfi_offset 4, -8
  1714              		.cfi_offset 14, -4
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 82
-
-
  140:Core/Src/main.c **** 	while (LL_FLASH_GetLatency() != LL_FLASH_LATENCY_0) {
  1715              		.loc 1 140 2 view .LVU461
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 82
+
+
  1716              	.LVL84:
  1717              	.LBB60:
  1718              	.LBI60:
@@ -4918,11 +4916,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  677:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (uint32_t)(READ_BIT(SYSCFG->EXTICR[Line & 0xFF], (SYSCFG_EXTICR1_EXTI0 << (Line >> 16))) >
  678:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
  679:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 83
-
-
  680:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE0_SR_EWDG)
  681:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 83
+
+
  682:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Check if Window watchdog interrupt occurred or not.
  683:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE0 SR_EWDG       LL_SYSCFG_IsActiveFlag_WWDG
  684:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
@@ -4978,11 +4976,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  734:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_RTC_TSTAMP(void)
  735:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
  736:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (READ_BIT(SYSCFG->IT_LINE_SR[2], SYSCFG_ITLINE2_SR_RTC_TSTAMP) == (SYSCFG_ITLINE2_SR_RTC_T
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 84
-
-
  737:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
  738:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE2_SR_RTC_TSTAMP */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 84
+
+
  739:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
  740:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE2_SR_RTC_ALRA)
  741:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
@@ -5038,11 +5036,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  791:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE5 SR_EXTI0      LL_SYSCFG_IsActiveFlag_EXTI0
  792:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
  793:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 85
-
-
  794:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_EXTI0(void)
  795:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 85
+
+
  796:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (READ_BIT(SYSCFG->IT_LINE_SR[5], SYSCFG_ITLINE5_SR_EXTI0) == (SYSCFG_ITLINE5_SR_EXTI0));
  797:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
  798:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE5_SR_EXTI0 */
@@ -5098,11 +5096,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  848:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE7_SR_EXTI5)
  849:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
  850:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Check if EXTI line 5 interrupt occurred or not.
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 86
-
-
  851:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE7 SR_EXTI5      LL_SYSCFG_IsActiveFlag_EXTI5
  852:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 86
+
+
  853:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
  854:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_EXTI5(void)
  855:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
@@ -5158,11 +5156,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  905:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
  906:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE7_SR_EXTI9 */
  907:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 87
-
-
  908:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE7_SR_EXTI10)
  909:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 87
+
+
  910:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Check if EXTI line 10 interrupt occurred or not.
  911:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE7 SR_EXTI10     LL_SYSCFG_IsActiveFlag_EXTI10
  912:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
@@ -5218,11 +5216,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  962:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_EXTI14(void)
  963:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
  964:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (READ_BIT(SYSCFG->IT_LINE_SR[7], SYSCFG_ITLINE7_SR_EXTI14) == (SYSCFG_ITLINE7_SR_EXTI14));
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 88
-
-
  965:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
  966:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE7_SR_EXTI14 */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 88
+
+
  967:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
  968:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE7_SR_EXTI15)
  969:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
@@ -5278,11 +5276,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1019:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE10 SR_DMA1_CH2   LL_SYSCFG_IsActiveFlag_DMA1_CH2
 1020:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
 1021:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 89
-
-
 1022:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_DMA1_CH2(void)
 1023:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 89
+
+
 1024:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (READ_BIT(SYSCFG->IT_LINE_SR[10], SYSCFG_ITLINE10_SR_DMA1_CH2) == (SYSCFG_ITLINE10_SR_DMA1
 1025:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1026:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE10_SR_DMA1_CH2 */
@@ -5338,11 +5336,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1076:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE11_SR_DMA1_CH5)
 1077:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
 1078:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Check if DMA1 channel 5 interrupt occurred or not.
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 90
-
-
 1079:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE11 SR_DMA1_CH5   LL_SYSCFG_IsActiveFlag_DMA1_CH5
 1080:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 90
+
+
 1081:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
 1082:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_DMA1_CH5(void)
 1083:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
@@ -5398,11 +5396,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1133:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1134:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE11_SR_DMA2_CH4 */
 1135:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 91
-
-
 1136:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE11_SR_DMA2_CH5)
 1137:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 91
+
+
 1138:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Check if DMA2 channel 5 interrupt occurred or not.
 1139:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE11 SR_DMA2_CH5   LL_SYSCFG_IsActiveFlag_DMA2_CH5
 1140:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
@@ -5458,11 +5456,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1190:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_TIM1_BRK(void)
 1191:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
 1192:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (READ_BIT(SYSCFG->IT_LINE_SR[13], SYSCFG_ITLINE13_SR_TIM1_BRK) == (SYSCFG_ITLINE13_SR_TIM1
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 92
-
-
 1193:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1194:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE13_SR_TIM1_BRK */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 92
+
+
 1195:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
 1196:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE13_SR_TIM1_UPD)
 1197:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
@@ -5518,11 +5516,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1247:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE15 SR_TIM2_GLB   LL_SYSCFG_IsActiveFlag_TIM2
 1248:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
 1249:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 93
-
-
 1250:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_TIM2(void)
 1251:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 93
+
+
 1252:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (READ_BIT(SYSCFG->IT_LINE_SR[15], SYSCFG_ITLINE15_SR_TIM2_GLB) == (SYSCFG_ITLINE15_SR_TIM2
 1253:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1254:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE15_SR_TIM2_GLB */
@@ -5578,11 +5576,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1304:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE19_SR_TIM14_GLB)
 1305:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
 1306:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Check if Timer 14 interrupt occurred or not.
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 94
-
-
 1307:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE19 SR_TIM14_GLB  LL_SYSCFG_IsActiveFlag_TIM14
 1308:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 94
+
+
 1309:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
 1310:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_TIM14(void)
 1311:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
@@ -5638,11 +5636,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1361:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1362:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE23_SR_I2C1_GLB */
 1363:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 95
-
-
 1364:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE24_SR_I2C2_GLB)
 1365:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 95
+
+
 1366:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Check if I2C2 interrupt occurred or not.
 1367:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE24 SR_I2C2_GLB   LL_SYSCFG_IsActiveFlag_I2C2
 1368:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
@@ -5698,11 +5696,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1418:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_USART2(void)
 1419:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
 1420:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (READ_BIT(SYSCFG->IT_LINE_SR[28], SYSCFG_ITLINE28_SR_USART2_GLB) == (SYSCFG_ITLINE28_SR_US
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 96
-
-
 1421:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1422:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE28_SR_USART2_GLB */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 96
+
+
 1423:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
 1424:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_ITLINE29_SR_USART3_GLB)
 1425:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
@@ -5758,11 +5756,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1475:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll SYSCFG_ITLINE29 SR_USART7_GLB  LL_SYSCFG_IsActiveFlag_USART7
 1476:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval State of bit (1 or 0).
 1477:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 97
-
-
 1478:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE uint32_t LL_SYSCFG_IsActiveFlag_USART7(void)
 1479:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 97
+
+
 1480:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   return (READ_BIT(SYSCFG->IT_LINE_SR[29], SYSCFG_ITLINE29_SR_USART7_GLB) == (SYSCFG_ITLINE29_SR_US
 1481:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1482:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /* SYSCFG_ITLINE29_SR_USART7_GLB */
@@ -5818,11 +5816,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1532:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
 1533:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** __STATIC_INLINE void LL_SYSCFG_SetTIMBreakInputs(uint32_t Break)
 1534:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** {
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 98
-
-
 1535:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #if defined(SYSCFG_CFGR2_PVD_LOCK)
 1536:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   MODIFY_REG(SYSCFG->CFGR2, SYSCFG_CFGR2_LOCKUP_LOCK | SYSCFG_CFGR2_SRAM_PARITY_LOCK | SYSCFG_CFGR2
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 98
+
+
 1537:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #else
 1538:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   MODIFY_REG(SYSCFG->CFGR2, SYSCFG_CFGR2_LOCKUP_LOCK | SYSCFG_CFGR2_SRAM_PARITY_LOCK, Break);
 1539:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** #endif /*SYSCFG_CFGR2_PVD_LOCK*/
@@ -5878,11 +5876,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1589:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @{
 1590:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
 1591:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 99
-
-
 1592:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
 1593:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Return the device identifier
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 99
+
+
 1594:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @note For STM32F03x devices, the device ID is 0x444
 1595:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @note For STM32F04x devices, the device ID is 0x445.
 1596:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @note For STM32F05x devices, the device ID is 0x440
@@ -5938,11 +5936,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1646:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STANDBY);
 1647:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1648:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 100
-
-
 1649:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
 1650:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @brief  Disable the Debug Module during STANDBY mode
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 100
+
+
 1651:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @rmtoll DBGMCU_CR    DBG_STANDBY   LL_DBGMCU_DisableDBGStandbyMode
 1652:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @retval None
 1653:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
@@ -5998,11 +5996,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1703:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @param  Periphs This parameter can be a combination of the following values:
 1704:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_DBGMCU_APB1_GRP1_TIM2_STOP (*)
 1705:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_DBGMCU_APB1_GRP1_TIM3_STOP
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 101
-
-
 1706:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_DBGMCU_APB1_GRP1_TIM6_STOP (*)
 1707:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_DBGMCU_APB1_GRP1_TIM7_STOP (*)
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 101
+
+
 1708:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_DBGMCU_APB1_GRP1_TIM14_STOP
 1709:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_DBGMCU_APB1_GRP1_RTC_STOP
 1710:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   *         @arg @ref LL_DBGMCU_APB1_GRP1_WWDG_STOP
@@ -6058,11 +6056,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1760:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   CLEAR_BIT(DBGMCU->APB2FZ, Periphs);
 1761:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** }
 1762:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /**
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 102
-
-
 1763:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @}
 1764:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 102
+
+
 1765:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** 
 1766:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h **** /** @defgroup SYSTEM_LL_EF_FLASH FLASH
 1767:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_system.h ****   * @{
@@ -6118,11 +6116,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1741 000e 1B68     		ldr	r3, [r3]
  1742              	.LBE63:
  1743              	.LBE62:
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 103
-
-
  141:Core/Src/main.c **** 	}
  1744              		.loc 1 141 31 discriminator 1 view .LVU470
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 103
+
+
  1745 0010 DB07     		lsls	r3, r3, #31
  1746 0012 FBD4     		bmi	.L101
  143:Core/Src/main.c **** 
@@ -6178,11 +6176,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
   46:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define RCC_POSITION_HPRE       (uint32_t)4U  /*!< field position in register RCC_CFGR */
   47:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define RCC_POSITION_PPRE1      (uint32_t)8U  /*!< field position in register RCC_CFGR */
   48:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define RCC_POSITION_PLLMUL     (uint32_t)18U /*!< field position in register RCC_CFGR */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 104
-
-
   49:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define RCC_POSITION_HSICAL     (uint32_t)8U  /*!< field position in register RCC_CR */
   50:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define RCC_POSITION_HSITRIM    (uint32_t)3U  /*!< field position in register RCC_CR */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 104
+
+
   51:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define RCC_POSITION_HSI14TRIM  (uint32_t)3U  /*!< field position in register RCC_CR2 */
   52:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define RCC_POSITION_HSI14CAL   (uint32_t)8U  /*!< field position in register RCC_CR2 */
   53:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #if defined(RCC_HSI48_SUPPORT)
@@ -6238,11 +6236,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  103:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /** @defgroup RCC_LL_Exported_Constants RCC Exported Constants
  104:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @{
  105:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 105
-
-
  106:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
  107:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /** @defgroup RCC_LL_EC_OSC_VALUES Oscillator Values adaptation
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 105
+
+
  108:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @brief    Defines used to adapt values of different oscillators
  109:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @note     These values could be modified in the user environment according to
  110:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *           HW set-up.
@@ -6298,11 +6296,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  160:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_CIR_LSIRDYF                RCC_CIR_LSIRDYF     /*!< LSI Ready Interrupt flag */
  161:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_CIR_LSERDYF                RCC_CIR_LSERDYF     /*!< LSE Ready Interrupt flag */
  162:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_CIR_HSIRDYF                RCC_CIR_HSIRDYF     /*!< HSI Ready Interrupt flag */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 106
-
-
  163:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_CIR_HSERDYF                RCC_CIR_HSERDYF     /*!< HSE Ready Interrupt flag */
  164:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_CIR_PLLRDYF                RCC_CIR_PLLRDYF     /*!< PLL Ready Interrupt flag */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 106
+
+
  165:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_CIR_HSI14RDYF               RCC_CIR_HSI14RDYF  /*!< HSI14 Ready Interrupt flag */
  166:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #if defined(RCC_HSI48_SUPPORT)
  167:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_CIR_HSI48RDYF               RCC_CIR_HSI48RDYF  /*!< HSI48 Ready Interrupt flag */
@@ -6358,11 +6356,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  217:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_SYS_CLKSOURCE_PLL           RCC_CFGR_SW_PLL    /*!< PLL selection as system clock */
  218:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #if defined(RCC_CFGR_SW_HSI48)
  219:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_SYS_CLKSOURCE_HSI48         RCC_CFGR_SW_HSI48  /*!< HSI48 selection as system clock 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 107
-
-
  220:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #endif /* RCC_CFGR_SW_HSI48 */
  221:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 107
+
+
  222:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @}
  223:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  224:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
@@ -6418,11 +6416,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  274:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_MCO1SOURCE_LSI              RCC_CFGR_MCOSEL_LSI          /*!< LSI selection as MCO s
  275:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_MCO1SOURCE_LSE              RCC_CFGR_MCOSEL_LSE          /*!< LSE selection as MCO s
  276:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #if defined(RCC_CFGR_MCOSEL_HSI48)
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 108
-
-
  277:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_MCO1SOURCE_HSI48            RCC_CFGR_MCOSEL_HSI48        /*!< HSI48 selection as MCO
  278:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #endif /* RCC_CFGR_MCOSEL_HSI48 */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 108
+
+
  279:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_MCO1SOURCE_PLLCLK_DIV_2     RCC_CFGR_MCOSEL_PLL_DIV2     /*!< PLL clock divided by 2
  280:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #if defined(RCC_CFGR_PLLNODIV)
  281:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_MCO1SOURCE_PLLCLK           (RCC_CFGR_MCOSEL_PLL_DIV2 | RCC_CFGR_PLLNODIV) /*!< PLL 
@@ -6478,11 +6476,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  331:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_USART3_CLKSOURCE_LSE        (uint32_t)((RCC_POSITION_USART3SW << 24) | RCC_CFGR3_USA
  332:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_USART3_CLKSOURCE_HSI        (uint32_t)((RCC_POSITION_USART3SW << 24) | RCC_CFGR3_USA
  333:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #endif /* RCC_CFGR3_USART3SW */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 109
-
-
  334:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
  335:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @}
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 109
+
+
  336:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  337:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
  338:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /** @defgroup RCC_LL_EC_I2C1_CLKSOURCE Peripheral I2C clock source selection
@@ -6538,11 +6536,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  388:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
  389:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /** @defgroup RCC_LL_EC_I2C1 Peripheral I2C get clock source
  390:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @{
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 110
-
-
  391:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  392:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_I2C1_CLKSOURCE              RCC_CFGR3_I2C1SW     /*!< I2C1 Clock source selection */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 110
+
+
  393:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
  394:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @}
  395:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
@@ -6598,11 +6596,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  445:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** #define LL_RCC_PLL_MUL_16                  RCC_CFGR_PLLMUL16  /*!< PLL input clock*16 */
  446:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
  447:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @}
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 111
-
-
  448:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  449:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 111
+
+
  450:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /** @defgroup RCC_LL_EC_PLLSOURCE PLL SOURCE
  451:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @{
  452:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
@@ -6658,11 +6656,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  502:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
  503:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @}
  504:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 112
-
-
  505:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
  506:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 112
+
+
  507:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @}
  508:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  509:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
@@ -6718,11 +6716,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  559:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_PLL_MUL_13
  560:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_PLL_MUL_14
  561:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_PLL_MUL_15
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 113
-
-
  562:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_PLL_MUL_16
  563:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @param  __PLLPREDIV__ This parameter can be one of the following values:
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 113
+
+
  564:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_PREDIV_DIV_1
  565:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_PREDIV_DIV_2
  566:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_PREDIV_DIV_3
@@ -6778,11 +6776,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  616:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @param  __AHBPRESCALER__ This parameter can be one of the following values:
  617:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_SYSCLK_DIV_1
  618:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_SYSCLK_DIV_2
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 114
-
-
  619:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_SYSCLK_DIV_4
  620:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_SYSCLK_DIV_8
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 114
+
+
  621:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_SYSCLK_DIV_16
  622:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_SYSCLK_DIV_64
  623:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_SYSCLK_DIV_128
@@ -6838,11 +6836,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  673:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @brief  Disable the Clock Security System.
  674:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @note Cannot be disabled in HSE is ready (only by hardware)
  675:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @rmtoll CR           CSSON         LL_RCC_HSE_DisableCSS
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 115
-
-
  676:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @retval None
  677:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 115
+
+
  678:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** __STATIC_INLINE void LL_RCC_HSE_DisableCSS(void)
  679:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** {
  680:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   CLEAR_BIT(RCC->CR, RCC_CR_CSSON);
@@ -6898,11 +6896,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  730:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   return (READ_BIT(RCC->CR, RCC_CR_HSERDY) == (RCC_CR_HSERDY));
  731:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** }
  732:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 116
-
-
  733:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
  734:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @}
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 116
+
+
  735:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  736:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
  737:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /** @defgroup RCC_LL_EF_HSI HSI
@@ -6958,11 +6956,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  768:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   return (READ_BIT(RCC->CR, RCC_CR_HSIRDY) == (RCC_CR_HSIRDY));
  1768              		.loc 7 768 3 discriminator 1 view .LVU477
  1769              		.loc 7 768 11 is_stmt 0 discriminator 1 view .LVU478
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 117
-
-
  1770 001e 1E4B     		ldr	r3, .L110+4
  1771 0020 1B68     		ldr	r3, [r3]
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 117
+
+
  1772              	.LBE67:
  1773              	.LBE66:
  146:Core/Src/main.c **** 	}
@@ -7018,11 +7016,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1795              		.loc 1 149 2 is_stmt 1 view .LVU484
  1796              	.LBB70:
  1797              	.LBI70:
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 118
-
-
  795:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** }
  796:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 118
+
+
  797:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
  798:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @brief  Get HSI Calibration trimming
  799:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @rmtoll CR        HSITRIM       LL_RCC_HSI_GetCalibTrimming
@@ -7078,11 +7076,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  849:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @retval Between Min_Data = 0x00 and Max_Data = 0xFF
  850:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  851:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** __STATIC_INLINE uint32_t LL_RCC_HSI48_GetCalibration(void)
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 119
-
-
  852:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** {
  853:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   return (uint32_t)(READ_BIT(RCC->CR2, RCC_CR2_HSI48CAL) >> RCC_POSITION_HSI48CAL);
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 119
+
+
  854:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** }
  855:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
  856:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
@@ -7138,11 +7136,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  890:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  891:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** __STATIC_INLINE uint32_t LL_RCC_HSI14_IsReady(void)
  1812              		.loc 7 891 26 discriminator 1 view .LVU489
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 120
-
-
  1813              	.LBB73:
  892:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** {
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 120
+
+
  893:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   return (READ_BIT(RCC->CR2, RCC_CR2_HSI14RDY) == (RCC_CR2_HSI14RDY));
  1814              		.loc 7 893 3 discriminator 1 view .LVU490
  1815              		.loc 7 893 11 is_stmt 0 discriminator 1 view .LVU491
@@ -7198,11 +7196,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1829              		.loc 7 927 3 view .LVU495
  1830 0044 144B     		ldr	r3, .L110+4
  1831 0046 5A6B     		ldr	r2, [r3, #52]
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 121
-
-
  1832 0048 F821     		movs	r1, #248
  1833 004a 8A43     		bics	r2, r1
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 121
+
+
  1834 004c 7839     		subs	r1, r1, #120
  1835 004e 0A43     		orrs	r2, r1
  1836 0050 5A63     		str	r2, [r3, #52]
@@ -7258,11 +7256,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  969:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
  970:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
  971:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @brief  Disable  Low Speed External (LSE) crystal.
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 122
-
-
  972:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @rmtoll BDCR         LSEON         LL_RCC_LSE_Disable
  973:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @retval None
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 122
+
+
  974:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
  975:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** __STATIC_INLINE void LL_RCC_LSE_Disable(void)
  976:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** {
@@ -7318,11 +7316,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1026:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** {
 1027:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   return (uint32_t)(READ_BIT(RCC->BDCR, RCC_BDCR_LSEDRV));
 1028:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** }
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 123
-
-
 1029:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
 1030:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 123
+
+
 1031:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @brief  Check if LSE oscillator Ready
 1032:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @rmtoll BDCR         LSERDY        LL_RCC_LSE_IsReady
 1033:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @retval State of bit (1 or 0).
@@ -7378,11 +7376,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
 1083:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @{
 1084:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   */
 1085:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** 
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 124
-
-
 1086:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** /**
 1087:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @brief  Configure the system clock source
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 124
+
+
 1088:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @rmtoll CFGR         SW            LL_RCC_SetSysClkSource
 1089:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   * @param  Source This parameter can be one of the following values:
 1090:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h ****   *         @arg @ref LL_RCC_SYS_CLKSOURCE_HSI
@@ -7438,11 +7436,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1847 0052 5A68     		ldr	r2, [r3, #4]
  1848 0054 7031     		adds	r1, r1, #112
  1849 0056 8A43     		bics	r2, r1
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 125
-
-
  1850 0058 5A60     		str	r2, [r3, #4]
  1851              	.LVL90:
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 125
+
+
  1852              		.loc 7 1136 3 is_stmt 0 view .LVU500
  1853              	.LBE77:
  1854              	.LBE76:
@@ -7498,11 +7496,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1883              	.LBE80:
  161:Core/Src/main.c **** 	LL_SetSystemCoreClock(8000000);
  1884              		.loc 1 161 2 is_stmt 1 discriminator 1 view .LVU509
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 126
-
-
  160:Core/Src/main.c **** 	}
  1885              		.loc 1 160 34 discriminator 1 view .LVU510
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 126
+
+
  1886              	.LBB82:
  1887              	.LBI82:
 1114:Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_rcc.h **** {
@@ -7558,11 +7556,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  169:Core/Src/main.c **** 
  1926              		.loc 1 169 1 is_stmt 0 view .LVU523
  1927              		@ sp needed
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 127
-
-
  1928 008e 10BD     		pop	{r4, pc}
  1929              	.L109:
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 127
+
+
  166:Core/Src/main.c **** 	}
  1930              		.loc 1 166 3 is_stmt 1 view .LVU524
  1931 0090 FFF7FEFF 		bl	Error_Handler
@@ -7615,27 +7613,27 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  1975              		.loc 1 97 2 view .LVU529
  1976 0010 FFF7FEFF 		bl	MX_ADC_Init
  1977              	.LVL99:
-  98:Core/Src/main.c **** 
+  98:Core/Src/main.c **** 	/* USER CODE BEGIN 2 */
  1978              		.loc 1 98 2 view .LVU530
  1979 0014 FFF7FEFF 		bl	MX_TIM3_Init
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 128
-
-
  1980              	.LVL100:
- 101:Core/Src/main.c **** 
- 1981              		.loc 1 101 2 view .LVU531
+ 100:Core/Src/main.c **** 
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 128
+
+
+ 1981              		.loc 1 100 2 view .LVU531
  1982 0018 FFF7FEFF 		bl	init_LCD
  1983              	.LVL101:
- 104:Core/Src/main.c **** 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);  // Start PWM on TIM3 Channel 3
- 1984              		.loc 1 104 2 view .LVU532
- 105:Core/Src/main.c **** 	HAL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_0);
- 1985              		.loc 1 105 2 view .LVU533
+ 103:Core/Src/main.c **** 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);  // Start PWM on TIM3 Channel 3
+ 1984              		.loc 1 103 2 view .LVU532
+ 104:Core/Src/main.c **** 	HAL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_0);
+ 1985              		.loc 1 104 2 view .LVU533
  1986 001c 1148     		ldr	r0, .L114
  1987 001e 0821     		movs	r1, #8
  1988 0020 FFF7FEFF 		bl	HAL_TIM_PWM_Start
  1989              	.LVL102:
- 106:Core/Src/main.c **** 
- 1990              		.loc 1 106 2 view .LVU534
+ 105:Core/Src/main.c **** 
+ 1990              		.loc 1 105 2 view .LVU534
  1991 0024 0121     		movs	r1, #1
  1992 0026 1048     		ldr	r0, .L114+4
  1993 0028 FFF7FEFF 		bl	HAL_GPIO_TogglePin
@@ -7678,11 +7676,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  2021              		.loc 1 123 3 discriminator 1 view .LVU543
  123:Core/Src/main.c **** 		__HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_3, CCR);  // Update PWM value
  2022              		.loc 1 123 9 is_stmt 0 discriminator 1 view .LVU544
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 129
-
-
  2023 004c 2068     		ldr	r0, [r4]
  2024 004e FFF7FEFF 		bl	ADCtoCCR
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 129
+
+
  2025              	.LVL108:
  124:Core/Src/main.c **** 
  2026              		.loc 1 124 3 is_stmt 1 discriminator 1 view .LVU545
@@ -7738,11 +7736,11 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  2081              		.section	.bss.htim3,"aw",%nobits
  2082              		.align	2
  2085              	htim3:
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 130
-
-
  2086 0000 00000000 		.space	72
  2086      00000000 
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 130
+
+
  2086      00000000 
  2086      00000000 
  2086      00000000 
@@ -7775,75 +7773,75 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 1
  2111              		.file 23 "/Users/sizweletanta/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vs
  2112              		.file 24 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_dma.h"
  2113              		.file 25 "<built-in>"
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 131
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 131
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:19     .text.MX_GPIO_Init:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:24     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:251    .text.MX_GPIO_Init:00000000000000bc $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:258    .text.delay:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:264    .text.delay:0000000000000000 delay
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:317    .text.pulse_strobe:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:323    .text.pulse_strobe:0000000000000000 pulse_strobe
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:376    .text.pulse_strobe:0000000000000034 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:381    .text.lcd_putchar:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:387    .text.lcd_putchar:0000000000000000 lcd_putchar
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:633    .text.lcd_putchar:000000000000011c $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:639    .text.lcd_putstring:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:645    .text.lcd_putstring:0000000000000000 lcd_putstring
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:696    .text.lcd_command:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:702    .text.lcd_command:0000000000000000 lcd_command
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:952    .text.lcd_command:0000000000000124 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:959    .text.init_LCD:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:965    .text.init_LCD:0000000000000000 init_LCD
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1058   .text.init_LCD:0000000000000070 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1066   .text.EXTI0_1_IRQHandler:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1072   .text.EXTI0_1_IRQHandler:0000000000000000 EXTI0_1_IRQHandler
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1139   .text.EXTI0_1_IRQHandler:0000000000000044 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2071   .bss.curr_millis:0000000000000000 curr_millis
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2078   .bss.prev_millis:0000000000000000 prev_millis
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2064   .data.delay_t:0000000000000000 delay_t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1146   .text.writeLCD:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1152   .text.writeLCD:0000000000000000 writeLCD
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1187   .text.writeLCD:0000000000000018 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1192   .text.pollADC:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1198   .text.pollADC:0000000000000000 pollADC
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1238   .text.pollADC:000000000000001c $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2092   .bss.hadc:0000000000000000 hadc
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1247   .text.ADCtoCCR:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1253   .text.ADCtoCCR:0000000000000000 ADCtoCCR
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1288   .text.ADCtoCCR:0000000000000018 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1294   .text.ADC1_COMP_IRQHandler:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1300   .text.ADC1_COMP_IRQHandler:0000000000000000 ADC1_COMP_IRQHandler
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1329   .text.ADC1_COMP_IRQHandler:0000000000000018 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2057   .bss.adc_val:0000000000000000 adc_val
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1335   .text.Error_Handler:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1341   .text.Error_Handler:0000000000000000 Error_Handler
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1373   .text.MX_ADC_Init:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1378   .text.MX_ADC_Init:0000000000000000 MX_ADC_Init
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1527   .text.MX_ADC_Init:0000000000000094 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1533   .text.MX_TIM3_Init:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1538   .text.MX_TIM3_Init:0000000000000000 MX_TIM3_Init
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1692   .text.MX_TIM3_Init:00000000000000a4 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2085   .bss.htim3:0000000000000000 htim3
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1699   .text.SystemClock_Config:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1705   .text.SystemClock_Config:0000000000000000 SystemClock_Config
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1936   .text.SystemClock_Config:0000000000000094 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1944   .rodata.main.str1.4:0000000000000000 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1948   .text.main:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:1954   .text.main:0000000000000000 main
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2044   .text.main:0000000000000064 $d
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s 			page 132
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:19     .text.MX_GPIO_Init:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:24     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:251    .text.MX_GPIO_Init:00000000000000bc $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:258    .text.delay:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:264    .text.delay:0000000000000000 delay
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:317    .text.pulse_strobe:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:323    .text.pulse_strobe:0000000000000000 pulse_strobe
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:376    .text.pulse_strobe:0000000000000034 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:381    .text.lcd_putchar:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:387    .text.lcd_putchar:0000000000000000 lcd_putchar
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:633    .text.lcd_putchar:000000000000011c $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:639    .text.lcd_putstring:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:645    .text.lcd_putstring:0000000000000000 lcd_putstring
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:696    .text.lcd_command:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:702    .text.lcd_command:0000000000000000 lcd_command
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:952    .text.lcd_command:0000000000000124 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:959    .text.init_LCD:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:965    .text.init_LCD:0000000000000000 init_LCD
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1058   .text.init_LCD:0000000000000070 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1066   .text.EXTI0_1_IRQHandler:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1072   .text.EXTI0_1_IRQHandler:0000000000000000 EXTI0_1_IRQHandler
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1139   .text.EXTI0_1_IRQHandler:0000000000000044 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2071   .bss.curr_millis:0000000000000000 curr_millis
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2078   .bss.prev_millis:0000000000000000 prev_millis
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2064   .data.delay_t:0000000000000000 delay_t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1146   .text.writeLCD:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1152   .text.writeLCD:0000000000000000 writeLCD
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1187   .text.writeLCD:0000000000000018 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1192   .text.pollADC:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1198   .text.pollADC:0000000000000000 pollADC
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1238   .text.pollADC:000000000000001c $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2092   .bss.hadc:0000000000000000 hadc
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1247   .text.ADCtoCCR:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1253   .text.ADCtoCCR:0000000000000000 ADCtoCCR
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1288   .text.ADCtoCCR:0000000000000018 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1294   .text.ADC1_COMP_IRQHandler:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1300   .text.ADC1_COMP_IRQHandler:0000000000000000 ADC1_COMP_IRQHandler
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1329   .text.ADC1_COMP_IRQHandler:0000000000000018 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2057   .bss.adc_val:0000000000000000 adc_val
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1335   .text.Error_Handler:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1341   .text.Error_Handler:0000000000000000 Error_Handler
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1373   .text.MX_ADC_Init:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1378   .text.MX_ADC_Init:0000000000000000 MX_ADC_Init
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1527   .text.MX_ADC_Init:0000000000000094 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1533   .text.MX_TIM3_Init:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1538   .text.MX_TIM3_Init:0000000000000000 MX_TIM3_Init
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1692   .text.MX_TIM3_Init:00000000000000a4 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2085   .bss.htim3:0000000000000000 htim3
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1699   .text.SystemClock_Config:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1705   .text.SystemClock_Config:0000000000000000 SystemClock_Config
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1936   .text.SystemClock_Config:0000000000000094 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1944   .rodata.main.str1.4:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1948   .text.main:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:1954   .text.main:0000000000000000 main
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2044   .text.main:0000000000000064 $d
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s 			page 132
 
 
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2054   .bss.adc_val:0000000000000000 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2061   .data.delay_t:0000000000000000 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2068   .bss.curr_millis:0000000000000000 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2075   .bss.prev_millis:0000000000000000 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2082   .bss.htim3:0000000000000000 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//cclLSDEC.s:2089   .bss.hadc:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2054   .bss.adc_val:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2061   .data.delay_t:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2068   .bss.curr_millis:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2075   .bss.prev_millis:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2082   .bss.htim3:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccbS10H5.s:2089   .bss.hadc:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 memset

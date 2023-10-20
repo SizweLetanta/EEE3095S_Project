@@ -3,31 +3,31 @@
   <FileVersion>3.0</FileVersion>
   <Workspace>
     <WorkspaceType>Single-project</WorkspaceType>
-    <WorkspacePath>C:\Users\invas\Downloads\STM\Prac3\Prac3\</WorkspacePath>
+    <WorkspacePath>/Users/sizweletanta/School/year_4/EEE3095S/Project/EEE3095S_Project/</WorkspacePath>
     <underRoot>false</underRoot>
     <TrustZone>0</TrustZone>
-    <HAL_Driver>C:\Users\invas\STM32Cube\Repository\STM32Cube_FW_F0_V1.11.4</HAL_Driver>
+    <HAL_Driver>/Users/sizweletanta/STM32Cube/Repository//STM32Cube_FW_F0_V1.11.4</HAL_Driver>
     <CMSIS>Drivers/CMSIS</CMSIS>
     <Toolchain>STM32CubeIDE</Toolchain>
-    <IocFile>Prac3.ioc</IocFile>
+    <IocFile>EEE3095S_Project.ioc</IocFile>
     <Project>
-      <ProjectName>Prac3</ProjectName>
+      <ProjectName>EEE3095S_Project</ProjectName>
       <ProjectNature>CPP</ProjectNature>
       <Secure/>
       <filestoremove/>
       <configs>
         <config>
-          <name>Prac3</name>
+          <name>EEE3095S_Project</name>
           <mainSourceRepo>Core</mainSourceRepo>
           <sourceStructure>Advanced</sourceStructure>
           <device>STM32F051C6Tx</device>
           <cpucore>Arm Cortex-M0</cpucore>
           <fpu>None</fpu>
           <memories>
-            <memory access="xrw" name="RAM" size="8" start="0x20000000"/>
-            <memory access="rx" name="FLASH" size="32" start="0x8000000"/>
+            <memory access="xrw" name="RAM" size="8192" start="0x20000000"/>
+            <memory access="rx" name="FLASH" size="32768" start="0x8000000"/>
           </memories>
-          <startup>C:\Users\invas\STM32Cube\Repository\STM32Cube_FW_F0_V1.11.4\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f051x8.s</startup>
+          <startup>/Users/sizweletanta/STM32Cube/Repository/STM32Cube_FW_F0_V1.11.4/Drivers/CMSIS/Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f051x8.s</startup>
           <LinkSettings>
             <LinkAdditionalLibs/>
           </LinkSettings>
@@ -48,17 +48,15 @@
           </Cdefines>
           <Ldefines/>
           <Cincludes>
-            <include>Core\Inc</include>
-            <include>Drivers\STM32F0xx_HAL_Driver\Inc</include>
-            <include>Drivers\STM32F0xx_HAL_Driver\Inc\Legacy</include>
-            <include>Drivers\CMSIS\Device\ST\STM32F0xx\Include</include>
-            <include>Drivers\CMSIS\Include</include>
+            <include>Core/Inc</include>
+            <include>Drivers/STM32F0xx_HAL_Driver/Inc</include>
+            <include>Drivers/STM32F0xx_HAL_Driver/Inc/Legacy</include>
+            <include>Drivers/CMSIS/Device/ST/STM32F0xx/Include</include>
+            <include>Drivers/CMSIS/Include</include>
           </Cincludes>
           <definestoremove>
             <Adefines/>
-            <Cdefines>
-              <define>MBEDTLS_CONFIG_FILE="mbedtls_config.h"</define>
-            </Cdefines>
+            <Cdefines/>
             <Ldefines/>
           </definestoremove>
           <inctoremove>
@@ -76,67 +74,67 @@
           <group>
             <name>STM32F0xx_HAL_Driver</name>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_gpio.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_gpio.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_adc.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_adc.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_adc_ex.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_adc_ex.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rcc.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_rcc.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_utils.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_utils.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_exti.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_ll_exti.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc_ex.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c_ex.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_gpio.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dma.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cortex.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr_ex.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash_ex.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_exti.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c</name>
             </file>
             <file>
-              <name>Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim_ex.c</name>
+              <name>Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c</name>
             </file>
           </group>
           <group>
@@ -153,13 +151,13 @@
             <group>
               <name>Core</name>
               <file>
-                <name>Core\Src\main.c</name>
+                <name>Core/Src/main.c</name>
               </file>
               <file>
-                <name>Core\Src\stm32f0xx_it.c</name>
+                <name>Core/Src/stm32f0xx_it.c</name>
               </file>
               <file>
-                <name>Core\Src\stm32f0xx_hal_msp.c</name>
+                <name>Core/Src/stm32f0xx_hal_msp.c</name>
               </file>
             </group>
           </group>

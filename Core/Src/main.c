@@ -43,12 +43,13 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc;
+
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 uint32_t prev_millis = 0;
 uint32_t curr_millis = 0;
-uint32_t delay_t = 1000;	 // Initialise delay to 500ms
+uint32_t delay_t = 1000;  // Initialise delay to 500ms
 uint32_t adc_val;
 /* USER CODE END PV */
 
@@ -57,7 +58,6 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC_Init(void);
 static void MX_TIM3_Init(void);
-
 /* USER CODE BEGIN PFP */
 void EXTI0_1_IRQHandler(void);
 void writeLCD(char* char_in);
@@ -96,7 +96,6 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_ADC_Init();
 	MX_TIM3_Init();
-
 	/* USER CODE BEGIN 2 */
 	init_LCD();
 
@@ -106,6 +105,7 @@ int main(void) {
 	HAL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_0);
 
 	/* USER CODE END 2 */
+
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
@@ -205,7 +205,7 @@ static void MX_ADC_Init(void) {
 
 	/** Configure for the selected ADC regular channel to be converted.
 	 */
-	sConfig.Channel = ADC_CHANNEL_6;
+	sConfig.Channel = ADC_CHANNEL_7;
 	sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
 	sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
 	if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
@@ -334,11 +334,9 @@ void EXTI0_1_IRQHandler(void) {
 			delay_t = 1000;
 		else
 			delay_t = 500;
-			
+
 		prev_millis = HAL_GetTick();
- 	}
-
-
+	}
 
 	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
 }
