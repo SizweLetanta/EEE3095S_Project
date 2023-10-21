@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
   30:Core/Src/system_stm32f0xx.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
   31:Core/Src/system_stm32f0xx.c ****   *
   32:Core/Src/system_stm32f0xx.c ****   ******************************************************************************
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 2
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 2
 
 
   33:Core/Src/system_stm32f0xx.c ****   */
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
   87:Core/Src/system_stm32f0xx.c ****   */
   88:Core/Src/system_stm32f0xx.c **** 
   89:Core/Src/system_stm32f0xx.c **** /** @addtogroup STM32F0xx_System_Private_Variables
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 3
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 3
 
 
   90:Core/Src/system_stm32f0xx.c ****   * @{
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
   36              	.LFE40:
   38              		.global	__aeabi_uidiv
   39              		.section	.text.SystemCoreClockUpdate,"ax",%progbits
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 4
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 4
 
 
   40              		.align	1
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
   50              		@ args = 0, pretend = 0, frame = 0
   51              		@ frame_needed = 0, uses_anonymous_args = 0
   52 0000 10B5     		push	{r4, lr}
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 5
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 5
 
 
   53              		.cfi_def_cfa_offset 8
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
  214:Core/Src/system_stm32f0xx.c **** #if defined(STM32F042x6) || defined(STM32F048xx)  || defined(STM32F070x6) \
  215:Core/Src/system_stm32f0xx.c ****  || defined(STM32F078xx) || defined(STM32F071xB)  || defined(STM32F072xB) \
  216:Core/Src/system_stm32f0xx.c ****  || defined(STM32F070xB) || defined(STM32F091xC) || defined(STM32F098xx)  || defined(STM32F030xC)
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 6
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 6
 
 
  217:Core/Src/system_stm32f0xx.c ****         /* HSI used as PLL clock source : SystemCoreClock = HSI/PREDIV * PLLMUL */
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
  105 002c 1340     		ands	r3, r2
  106              		.loc 1 233 22 view .LVU21
  107 002e 174A     		ldr	r2, .L9+12
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 7
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 7
 
 
  108 0030 D15C     		ldrb	r1, [r2, r3]
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
  147 004a A40C     		lsrs	r4, r4, #18
  148              	.LVL16:
  197:Core/Src/system_stm32f0xx.c ****       predivfactor = (RCC->CFGR2 & RCC_CFGR2_PREDIV) + 1;
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 8
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 8
 
 
  149              		.loc 1 197 27 view .LVU37
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
  221:Core/Src/system_stm32f0xx.c **** #endif /* STM32F042x6 || STM32F048xx || STM32F070x6 || 
  190              		.loc 1 221 25 view .LVU51
  191 0078 024A     		ldr	r2, .L9+4
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 9
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 9
 
 
  192 007a 1360     		str	r3, [r2]
@@ -518,22 +518,22 @@ ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 1
  229              		.file 3 "/Users/sizweletanta/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vsc
  230              		.file 4 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h"
  231              		.file 5 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f051x8.h"
-ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s 			page 10
+ARM GAS  /var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 system_stm32f0xx.c
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:19     .text.SystemInit:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:25     .text.SystemInit:0000000000000000 SystemInit
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:40     .text.SystemCoreClockUpdate:0000000000000000 $t
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:46     .text.SystemCoreClockUpdate:0000000000000000 SystemCoreClockUpdate
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:197    .text.SystemCoreClockUpdate:0000000000000080 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:224    .data.SystemCoreClock:0000000000000000 SystemCoreClock
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:216    .rodata.AHBPrescTable:0000000000000000 AHBPrescTable
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:209    .rodata.APBPrescTable:0000000000000000 APBPrescTable
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:206    .rodata.APBPrescTable:0000000000000000 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:213    .rodata.AHBPrescTable:0000000000000000 $d
-/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccly1ATB.s:221    .data.SystemCoreClock:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:19     .text.SystemInit:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:25     .text.SystemInit:0000000000000000 SystemInit
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:40     .text.SystemCoreClockUpdate:0000000000000000 $t
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:46     .text.SystemCoreClockUpdate:0000000000000000 SystemCoreClockUpdate
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:197    .text.SystemCoreClockUpdate:0000000000000080 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:224    .data.SystemCoreClock:0000000000000000 SystemCoreClock
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:216    .rodata.AHBPrescTable:0000000000000000 AHBPrescTable
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:209    .rodata.APBPrescTable:0000000000000000 APBPrescTable
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:206    .rodata.APBPrescTable:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:213    .rodata.AHBPrescTable:0000000000000000 $d
+/var/folders/zf/mkqpy7tx7p1_khjt1h6hykn40000gn/T//ccqX0wy9.s:221    .data.SystemCoreClock:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 __aeabi_uidiv

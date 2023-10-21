@@ -35,7 +35,7 @@
 /* USER CODE BEGIN PD */
 
 // The maximum ADC value that is recorded as a 0.
-#define MID_PULSE 70
+#define MID_PULSE 1500
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -51,7 +51,7 @@ TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN PV */
 uint32_t prev_millis = 0;
 uint32_t curr_millis = 0;
-uint32_t delay_t = 100;	 // Initialise delay to 500ms
+uint32_t delay_t = 1000;	 // Initialise delay to 500ms
 uint32_t adc_val;
 /* USER CODE END PV */
 

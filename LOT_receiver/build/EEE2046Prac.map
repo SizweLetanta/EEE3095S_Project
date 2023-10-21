@@ -101,7 +101,7 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/main.o
  .data          0x0000000000000000        0x0 build/main.o
  .bss           0x0000000000000000        0x0 build/main.o
- .text.readBit  0x0000000000000000       0x12 build/main.o
+ .text.readBit  0x0000000000000000       0x16 build/main.o
  .text          0x0000000000000000        0x0 build/stm32f0xx_hal_msp.o
  .data          0x0000000000000000        0x0 build/stm32f0xx_hal_msp.o
  .bss           0x0000000000000000        0x0 build/stm32f0xx_hal_msp.o
