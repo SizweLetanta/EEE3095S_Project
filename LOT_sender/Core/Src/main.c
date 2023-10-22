@@ -28,7 +28,10 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+typedef struct {
+	uint16_t data_remaining;
+	uint16_t bits_left;
+} DataStruct;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -45,12 +48,16 @@
 ADC_HandleTypeDef hadc;
 
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
 uint32_t prev_millis = 0;
 uint32_t curr_millis = 0;
 uint32_t delay_t = 1000;  // Initialise delay to 500ms
 uint32_t adc_val;
+DataStruct data;
+uint8_t totalBits = 18;
+uint8_t delayT = 3;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -58,9 +65,13 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_TIM16_Init(void);
+
 /* USER CODE BEGIN PFP */
+void TIM16_IRQHandler(void);
 void EXTI0_1_IRQHandler(void);
 void writeLCD(char* char_in);
+uint8_t getBit();
 uint32_t pollADC(void);
 /* USER CODE END PFP */
 
@@ -75,6 +86,8 @@ uint32_t pollADC(void);
  */
 int main(void) {
 	/* USER CODE BEGIN 1 */
+	data.data_remaining = 0b10110110;
+	data.bits_left = 8;
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -95,6 +108,7 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_ADC_Init();
 	MX_TIM3_Init();
+	MX_TIM16_Init();
 	/* USER CODE BEGIN 2 */
 	init_LCD();
 
@@ -108,9 +122,9 @@ int main(void) {
 
 		// ADC to LCD; TODO: Read POT1 value and write to LCD
 		char value[5];
-		adc_val = pollADC();			 // Get the value of the ADC
-		sprintf(value, "%lu", adc_val);	 // convert to string
-		writeLCD(value);				 // Write value to LCD
+		adc_val = pollADC();  // Get the value of the ADC
+		// sprintf(value, "%d %d", getBit(), data.bits_left);	 // convert to string
+		// writeLCD(value);  // Write value to LCD
 
 		// Wait for delay ms
 		HAL_Delay(delay_t);
@@ -119,6 +133,42 @@ int main(void) {
 		/* USER CODE BEGIN 3 */
 	}
 	/* USER CODE END 3 */
+}
+
+/**
+ * @brief Remove the least significant bit from the data until there are no more bits left.
+ *
+ * @return uint8_t
+ */
+uint8_t getBit() {
+	if (data.bits_left > 0) {
+		uint8_t bit_out = data.data_remaining % 2;
+		data.bits_left--;
+		data.data_remaining /= 2;
+		return bit_out;
+	}
+	return 0;
+}
+
+void trasmitData() {
+	switch (totalBits) {
+		case 18:
+			HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 0);
+			totalBits--;
+			break;
+		case 1:
+			HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 0);
+			totalBits--;
+			break;
+		case 0:
+			HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
+			HAL_TIM_Base_Stop_IT(&htim16);
+			break;
+		default:
+			HAL_GPIO_WritePin(LED_data_GPIO_Port, LED7_Pin, getBit());
+			totalBits--;
+			break;
+	}
 }
 
 /**
@@ -250,6 +300,36 @@ static void MX_TIM3_Init(void) {
 }
 
 /**
+ * @brief TIM16 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_TIM16_Init(void) {
+	/* USER CODE BEGIN TIM16_Init 0 */
+
+	/* USER CODE END TIM16_Init 0 */
+
+	/* USER CODE BEGIN TIM16_Init 1 */
+
+	/* USER CODE END TIM16_Init 1 */
+	htim16.Instance = TIM16;
+	htim16.Init.Prescaler = 8000 - 1;
+	htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim16.Init.Period = 1000 - 1;
+	htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim16.Init.RepetitionCounter = 0;
+	htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+	if (HAL_TIM_Base_Init(&htim16) != HAL_OK) {
+		Error_Handler();
+	}
+	/* USER CODE BEGIN TIM16_Init 2 */
+	// NVIC_EnableIRQ(TIM16_IRQn);
+	HAL_NVIC_SetPriority(TIM16_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(TIM16_IRQn);
+	/* USER CODE END TIM16_Init 2 */
+}
+
+/**
  * @brief GPIO Initialization Function
  * @param None
  * @retval None
@@ -266,7 +346,7 @@ static void MX_GPIO_Init(void) {
 	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
 
 	/**/
-	LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_0);
+	LL_GPIO_ResetOutputPin(LED_data_GPIO_Port, LED_data_Pin);
 
 	/**/
 	LL_GPIO_ResetOutputPin(LED7_GPIO_Port, LED7_Pin);
@@ -288,12 +368,12 @@ static void MX_GPIO_Init(void) {
 	LL_EXTI_Init(&EXTI_InitStruct);
 
 	/**/
-	GPIO_InitStruct.Pin = LL_GPIO_PIN_0;
+	GPIO_InitStruct.Pin = LED_data_Pin;
 	GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
 	GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
 	GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
 	GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-	LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+	LL_GPIO_Init(LED_data_GPIO_Port, &GPIO_InitStruct);
 
 	/**/
 	GPIO_InitStruct.Pin = LED7_Pin;
@@ -311,7 +391,6 @@ static void MX_GPIO_Init(void) {
 
 /* USER CODE BEGIN 4 */
 void EXTI0_1_IRQHandler(void) {
-
 	// debounce step
 	curr_millis = HAL_GetTick();
 	if (curr_millis - prev_millis < 100) {
@@ -320,15 +399,22 @@ void EXTI0_1_IRQHandler(void) {
 	}
 
 	// todo: Start data transmission when this is clicked
-	prev_millis = HAL_GetTick();
 
+	// HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
+	// HAL_Delay(3000);
+	// HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 0);
+	HAL_TIM_Base_Start_IT(&htim16);	 // Start the timer
+
+	// trasmitData();
+
+	prev_millis = HAL_GetTick();
 	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
 }
 
 void writeLCD(char* char_in) {
 	lcd_command(CLEAR);		 // Clear display
 	lcd_putstring(char_in);	 // write to display
-	delay(3000);			 // Delay
+	// delay(3000);			 // Delay
 }
 
 // Get ADC value
@@ -337,6 +423,22 @@ uint32_t pollADC(void) {
 	uint32_t val = HAL_ADC_GetValue(&hadc);	 // Get ADC value
 	HAL_ADC_Stop(&hadc);					 // Stop sampling
 	return val;
+}
+
+void TIM16_IRQHandler(void) {
+	if (delayT) {
+		HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
+		delayT--;
+		HAL_TIM_IRQHandler(&htim16);
+		return;
+	}
+
+	trasmitData();
+	char value[9];
+	// adc_val = pollADC();								// Get the value of the ADC
+	sprintf(value, "%d %d", getBit(), totalBits);	// convert to string
+	writeLCD(value);									// Write value to LCD
+	HAL_TIM_IRQHandler(&htim16);
 }
 
 void ADC1_COMP_IRQHandler(void) {

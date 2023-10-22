@@ -103,9 +103,6 @@ int main(void) {
 	/* USER CODE BEGIN 2 */
 	init_LCD();
 
-	// PWM setup
-	// uint32_t CCR = 0;
-	// HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);  // Start PWM on TIM3 Channel 3
 	HAL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_0);
 
 	/* USER CODE END 2 */
@@ -118,14 +115,9 @@ int main(void) {
 
 		// ADC to LCD; TODO: Read POT1 value and write to LCD
 		char value[5];
-		adc_val = pollADC();			 // Get the value of the ADC
+		// adc_val = pollADC();			 // Get the value of the ADC
 		sprintf(value, "%lu", adc_val);	 // convert to string
 		writeLCD(value);				 // Write value to LCD
-		// lcd_command(CLEAR);
-		// lcd_putchar(val++);
-		// Update PWM value; TODO: Get CRR
-		// CCR = ADCtoCCR(adc_val);						   // Get CRR value
-		// __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_3, CCR);  // Update PWM value
 
 		// Wait for delay ms
 		HAL_Delay(delay_t);
@@ -363,12 +355,6 @@ uint8_t readBit(void) {
 	return 1;
 }
 
-// // Get ADC value/ Calculate PWM CCR value
-// uint32_t ADCtoCCR(uint32_t adc_val) {
-// 	// TODO: Calculate CCR val using an appropriate equation
-// 	float duty_cycle = ((float)adc_val) / 4095.0f;	// Percentage of time the LED is on
-// 	uint32_t val = duty_cycle * 47999;				// The CRR value
-// 	return val;}
 uint32_t pollADC(void) {
 	// TODO: Complete function body to get ADC val
 	HAL_ADC_Start(&hadc);					 // Start sampling
@@ -384,6 +370,8 @@ uint32_t pollADC(void) {
 // 	uint32_t val = duty_cycle * 47999;				// The CRR value
 // 	return val;
 // }
+
+
 void ADC1_COMP_IRQHandler(void) {
 	adc_val = HAL_ADC_GetValue(&hadc);	// read adc value
 	HAL_ADC_IRQHandler(&hadc);			// Clear flags
