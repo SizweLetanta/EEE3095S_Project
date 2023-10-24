@@ -134,6 +134,68 @@ int main(void) {
 	/* USER CODE END 3 */
 }
 
+/* USER CODE BEGIN 4 */
+void EXTI0_1_IRQHandler(void) {
+	// debounce step
+	curr_millis = HAL_GetTick();
+	if (curr_millis - prev_millis < 100) {
+		HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
+		return;
+	}
+
+	// todo: Start data transmission when this is clicked
+
+	data.bits_left = 16;
+	data.data_remaining = adc_val;
+	transmittionStarted = 1;
+	HAL_TIM_Base_Start_IT(&htim16);	 // Start the timer
+
+	prev_millis = HAL_GetTick();
+	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
+}
+
+void writeLCD(char* char_in) {
+	lcd_command(CLEAR);		 // Clear display
+	lcd_putstring(char_in);	 // write to display
+							 // delay(3000);			 // Delay
+}
+
+// Get ADC value
+uint32_t pollADC(void) {
+	HAL_ADC_Start(&hadc);					 // Start sampling
+	uint32_t val = HAL_ADC_GetValue(&hadc);	 // Get ADC value
+	HAL_ADC_Stop(&hadc);					 // Stop sampling
+	return val;
+}
+
+/**
+ * @brief transmits a bit every tick
+ * 
+ */
+void TIM16_IRQHandler(void) {
+	if (delayT) {
+		HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
+		delayT--;
+		HAL_TIM_IRQHandler(&htim16);
+		return;
+	}
+
+	trasmitData();
+	char value[9];
+
+	sprintf(value, "%d", adc_val);  // convert to string
+	lcd_command(CLEAR);
+	lcd_putstring(value);
+
+	// adc_val = pollADC();								// Get the value of the ADC
+	sprintf(value, "%d %d", data.data_remaining, totalBits);  // convert to string
+	// writeLCD(value);										  // Write value to LCD
+	lcd_command(LINE_TWO);
+	lcd_putstring(value);
+	HAL_TIM_IRQHandler(&htim16);
+}
+
+
 /**
  * @brief Displays the current value of the to the screen
  *
@@ -397,63 +459,6 @@ static void MX_GPIO_Init(void) {
 	HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
 	HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
 	/* USER CODE END MX_GPIO_Init_2 */
-}
-
-/* USER CODE BEGIN 4 */
-void EXTI0_1_IRQHandler(void) {
-	// debounce step
-	curr_millis = HAL_GetTick();
-	if (curr_millis - prev_millis < 100) {
-		HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
-		return;
-	}
-
-	// todo: Start data transmission when this is clicked
-
-	data.bits_left = 16;
-	data.data_remaining = adc_val;
-	transmittionStarted = 1;
-	HAL_TIM_Base_Start_IT(&htim16);	 // Start the timer
-
-	prev_millis = HAL_GetTick();
-	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
-}
-
-void writeLCD(char* char_in) {
-	lcd_command(CLEAR);		 // Clear display
-	lcd_putstring(char_in);	 // write to display
-							 // delay(3000);			 // Delay
-}
-
-// Get ADC value
-uint32_t pollADC(void) {
-	HAL_ADC_Start(&hadc);					 // Start sampling
-	uint32_t val = HAL_ADC_GetValue(&hadc);	 // Get ADC value
-	HAL_ADC_Stop(&hadc);					 // Stop sampling
-	return val;
-}
-
-void TIM16_IRQHandler(void) {
-	if (delayT) {
-		HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
-		delayT--;
-		HAL_TIM_IRQHandler(&htim16);
-		return;
-	}
-
-	trasmitData();
-	char value[9];
-
-	sprintf(value, "%d", adc_val);  // convert to string
-	lcd_command(CLEAR);
-	lcd_putstring(value);
-
-	// adc_val = pollADC();								// Get the value of the ADC
-	sprintf(value, "%d %d", data.data_remaining, totalBits);  // convert to string
-	// writeLCD(value);										  // Write value to LCD
-	lcd_command(LINE_TWO);
-	lcd_putstring(value);
-	HAL_TIM_IRQHandler(&htim16);
 }
 
 void ADC1_COMP_IRQHandler(void) {

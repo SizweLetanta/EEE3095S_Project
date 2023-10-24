@@ -1483,23 +1483,23 @@ LOAD /Users/sizweletanta/Library/Application Support/Code/User/globalStorage/bmd
  .text.init_LCD
                 0x00000000080005d4       0x80 build/main.o
                 0x00000000080005d4                init_LCD
- .text.getBit   0x0000000008000654       0x20 build/main.o
-                0x0000000008000654                getBit
- .text.trasmitData
-                0x0000000008000674       0x78 build/main.o
-                0x0000000008000674                trasmitData
  .text.EXTI0_1_IRQHandler
-                0x00000000080006ec       0x5c build/main.o
-                0x00000000080006ec                EXTI0_1_IRQHandler
+                0x0000000008000654       0x5c build/main.o
+                0x0000000008000654                EXTI0_1_IRQHandler
  .text.writeLCD
-                0x0000000008000748       0x12 build/main.o
-                0x0000000008000748                writeLCD
- *fill*         0x000000000800075a        0x2 
- .text.pollADC  0x000000000800075c       0x20 build/main.o
-                0x000000000800075c                pollADC
+                0x00000000080006b0       0x12 build/main.o
+                0x00000000080006b0                writeLCD
+ *fill*         0x00000000080006c2        0x2 
+ .text.pollADC  0x00000000080006c4       0x20 build/main.o
+                0x00000000080006c4                pollADC
  .text.sampleADC
-                0x000000000800077c       0x2c build/main.o
-                0x000000000800077c                sampleADC
+                0x00000000080006e4       0x2c build/main.o
+                0x00000000080006e4                sampleADC
+ .text.getBit   0x0000000008000710       0x20 build/main.o
+                0x0000000008000710                getBit
+ .text.trasmitData
+                0x0000000008000730       0x78 build/main.o
+                0x0000000008000730                trasmitData
  .text.TIM16_IRQHandler
                 0x00000000080007a8       0x8c build/main.o
                 0x00000000080007a8                TIM16_IRQHandler
@@ -2089,37 +2089,37 @@ LOAD /Users/sizweletanta/Library/Application Support/Code/User/globalStorage/bmd
  .comment       0x0000000000000038       0x39 /Users/sizweletanta/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/12.2.1-1.2.1/.content/bin/../lib/gcc/arm-none-eabi/12.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a(libc_a-msizer.o)
  .comment       0x0000000000000038       0x39 /Users/sizweletanta/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/12.2.1-1.2.1/.content/bin/../lib/gcc/arm-none-eabi/12.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(sbrk.o)
 
-.debug_info     0x0000000000000000     0xbecb
- .debug_info    0x0000000000000000     0x1f32 build/main.o
- .debug_info    0x0000000000001f32      0xc09 build/stm32f0xx_hal_msp.o
- .debug_info    0x0000000000002b3b      0x121 build/stm32f0xx_it.o
- .debug_info    0x0000000000002c5c      0x25d build/system_stm32f0xx.o
- .debug_info    0x0000000000002eb9      0x74c build/stm32f0xx_hal.o
- .debug_info    0x0000000000003605      0xf56 build/stm32f0xx_hal_adc.o
- .debug_info    0x000000000000455b      0x7cc build/stm32f0xx_hal_cortex.o
- .debug_info    0x0000000000004d27      0x5ec build/stm32f0xx_hal_gpio.o
- .debug_info    0x0000000000005313     0x3b27 build/stm32f0xx_hal_tim.o
- .debug_info    0x0000000000008e3a     0x1a01 build/stm32f0xx_hal_tim_ex.o
- .debug_info    0x000000000000a83b      0x4d7 build/stm32f0xx_ll_exti.o
- .debug_info    0x000000000000ad12      0x76f build/stm32f0xx_ll_gpio.o
- .debug_info    0x000000000000b481      0xa1c build/stm32f0xx_ll_utils.o
- .debug_info    0x000000000000be9d       0x2e build/startup_stm32f051x8.o
+.debug_info     0x0000000000000000     0xbee1
+ .debug_info    0x0000000000000000     0x1f48 build/main.o
+ .debug_info    0x0000000000001f48      0xc09 build/stm32f0xx_hal_msp.o
+ .debug_info    0x0000000000002b51      0x121 build/stm32f0xx_it.o
+ .debug_info    0x0000000000002c72      0x25d build/system_stm32f0xx.o
+ .debug_info    0x0000000000002ecf      0x74c build/stm32f0xx_hal.o
+ .debug_info    0x000000000000361b      0xf56 build/stm32f0xx_hal_adc.o
+ .debug_info    0x0000000000004571      0x7cc build/stm32f0xx_hal_cortex.o
+ .debug_info    0x0000000000004d3d      0x5ec build/stm32f0xx_hal_gpio.o
+ .debug_info    0x0000000000005329     0x3b27 build/stm32f0xx_hal_tim.o
+ .debug_info    0x0000000000008e50     0x1a01 build/stm32f0xx_hal_tim_ex.o
+ .debug_info    0x000000000000a851      0x4d7 build/stm32f0xx_ll_exti.o
+ .debug_info    0x000000000000ad28      0x76f build/stm32f0xx_ll_gpio.o
+ .debug_info    0x000000000000b497      0xa1c build/stm32f0xx_ll_utils.o
+ .debug_info    0x000000000000beb3       0x2e build/startup_stm32f051x8.o
 
-.debug_abbrev   0x0000000000000000     0x1def
- .debug_abbrev  0x0000000000000000      0x48a build/main.o
- .debug_abbrev  0x000000000000048a      0x1f8 build/stm32f0xx_hal_msp.o
- .debug_abbrev  0x0000000000000682       0xb5 build/stm32f0xx_it.o
- .debug_abbrev  0x0000000000000737      0x136 build/system_stm32f0xx.o
- .debug_abbrev  0x000000000000086d      0x265 build/stm32f0xx_hal.o
- .debug_abbrev  0x0000000000000ad2      0x22f build/stm32f0xx_hal_adc.o
- .debug_abbrev  0x0000000000000d01      0x2ec build/stm32f0xx_hal_cortex.o
- .debug_abbrev  0x0000000000000fed      0x1f8 build/stm32f0xx_hal_gpio.o
- .debug_abbrev  0x00000000000011e5      0x285 build/stm32f0xx_hal_tim.o
- .debug_abbrev  0x000000000000146a      0x283 build/stm32f0xx_hal_tim_ex.o
- .debug_abbrev  0x00000000000016ed      0x1b3 build/stm32f0xx_ll_exti.o
- .debug_abbrev  0x00000000000018a0      0x225 build/stm32f0xx_ll_gpio.o
- .debug_abbrev  0x0000000000001ac5      0x30d build/stm32f0xx_ll_utils.o
- .debug_abbrev  0x0000000000001dd2       0x1d build/startup_stm32f051x8.o
+.debug_abbrev   0x0000000000000000     0x1dce
+ .debug_abbrev  0x0000000000000000      0x469 build/main.o
+ .debug_abbrev  0x0000000000000469      0x1f8 build/stm32f0xx_hal_msp.o
+ .debug_abbrev  0x0000000000000661       0xb5 build/stm32f0xx_it.o
+ .debug_abbrev  0x0000000000000716      0x136 build/system_stm32f0xx.o
+ .debug_abbrev  0x000000000000084c      0x265 build/stm32f0xx_hal.o
+ .debug_abbrev  0x0000000000000ab1      0x22f build/stm32f0xx_hal_adc.o
+ .debug_abbrev  0x0000000000000ce0      0x2ec build/stm32f0xx_hal_cortex.o
+ .debug_abbrev  0x0000000000000fcc      0x1f8 build/stm32f0xx_hal_gpio.o
+ .debug_abbrev  0x00000000000011c4      0x285 build/stm32f0xx_hal_tim.o
+ .debug_abbrev  0x0000000000001449      0x283 build/stm32f0xx_hal_tim_ex.o
+ .debug_abbrev  0x00000000000016cc      0x1b3 build/stm32f0xx_ll_exti.o
+ .debug_abbrev  0x000000000000187f      0x225 build/stm32f0xx_ll_gpio.o
+ .debug_abbrev  0x0000000000001aa4      0x30d build/stm32f0xx_ll_utils.o
+ .debug_abbrev  0x0000000000001db1       0x1d build/startup_stm32f051x8.o
 
 .debug_loclists
                 0x0000000000000000     0x66a9
@@ -2209,21 +2209,21 @@ LOAD /Users/sizweletanta/Library/Application Support/Code/User/globalStorage/bmd
  .debug_rnglists
                 0x0000000000000805       0x19 build/startup_stm32f051x8.o
 
-.debug_line     0x0000000000000000     0xb8c0
- .debug_line    0x0000000000000000      0xf8a build/main.o
- .debug_line    0x0000000000000f8a      0x3eb build/stm32f0xx_hal_msp.o
- .debug_line    0x0000000000001375      0x290 build/stm32f0xx_it.o
- .debug_line    0x0000000000001605      0x2d7 build/system_stm32f0xx.o
- .debug_line    0x00000000000018dc      0x5ba build/stm32f0xx_hal.o
- .debug_line    0x0000000000001e96     0x10bc build/stm32f0xx_hal_adc.o
- .debug_line    0x0000000000002f52      0x5eb build/stm32f0xx_hal_cortex.o
- .debug_line    0x000000000000353d      0x754 build/stm32f0xx_hal_gpio.o
- .debug_line    0x0000000000003c91     0x4cf6 build/stm32f0xx_hal_tim.o
- .debug_line    0x0000000000008987     0x1d51 build/stm32f0xx_hal_tim_ex.o
- .debug_line    0x000000000000a6d8      0x473 build/stm32f0xx_ll_exti.o
- .debug_line    0x000000000000ab4b      0x530 build/stm32f0xx_ll_gpio.o
- .debug_line    0x000000000000b07b      0x7ce build/stm32f0xx_ll_utils.o
- .debug_line    0x000000000000b849       0x77 build/startup_stm32f051x8.o
+.debug_line     0x0000000000000000     0xb8be
+ .debug_line    0x0000000000000000      0xf88 build/main.o
+ .debug_line    0x0000000000000f88      0x3eb build/stm32f0xx_hal_msp.o
+ .debug_line    0x0000000000001373      0x290 build/stm32f0xx_it.o
+ .debug_line    0x0000000000001603      0x2d7 build/system_stm32f0xx.o
+ .debug_line    0x00000000000018da      0x5ba build/stm32f0xx_hal.o
+ .debug_line    0x0000000000001e94     0x10bc build/stm32f0xx_hal_adc.o
+ .debug_line    0x0000000000002f50      0x5eb build/stm32f0xx_hal_cortex.o
+ .debug_line    0x000000000000353b      0x754 build/stm32f0xx_hal_gpio.o
+ .debug_line    0x0000000000003c8f     0x4cf6 build/stm32f0xx_hal_tim.o
+ .debug_line    0x0000000000008985     0x1d51 build/stm32f0xx_hal_tim_ex.o
+ .debug_line    0x000000000000a6d6      0x473 build/stm32f0xx_ll_exti.o
+ .debug_line    0x000000000000ab49      0x530 build/stm32f0xx_ll_gpio.o
+ .debug_line    0x000000000000b079      0x7ce build/stm32f0xx_ll_utils.o
+ .debug_line    0x000000000000b847       0x77 build/startup_stm32f051x8.o
 
 .debug_str      0x0000000000000000     0x332e
  .debug_str     0x0000000000000000     0x10b9 build/main.o
