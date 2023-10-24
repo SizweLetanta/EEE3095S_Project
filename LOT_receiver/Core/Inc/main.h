@@ -73,7 +73,8 @@ void Error_Handler(void);
 #define LDR_ADC_GPIO_Port GPIOA
 #define LED7_Pin LL_GPIO_PIN_7
 #define LED7_GPIO_Port GPIOB
-
+#define Button2_Pin LL_GPIO_PIN_2
+#define Button2_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

@@ -57,13 +57,17 @@ uint32_t curr_millis;
 uint32_t delay_t = 500;	 // Initialise delay to 500ms
 uint32_t adc_val;		 // stores the bit from the ADC
 uint32_t receivedData;	 // The received data is stored here
-uint32_t num_messages;
+uint8_t num_messages;
+uint8_t succes;
 
 enum state_t { IDLE,
 			   READY,
 			   RECEIVING,
 			   DONE };
 enum state_t current_state;
+
+enum mode_t { TRANSMISSION,
+			  VALIDATION } current_mode;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -74,6 +78,7 @@ static void MX_TIM3_Init(void);
 static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 void EXTI0_1_IRQHandler(void);
+void EXTI2_3_IRQHandler(void);
 void TIM16_IRQHandler(void);
 char* Dec2RadixI(int decValue, int radValue, char* output_string);
 // void writeLCD(char* char_in);
@@ -153,7 +158,6 @@ void displayLCD() {
 			lcd_putstring(value);
 			break;
 		case RECEIVING:
-			// value = {48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48};
 			sprintf(value, "receiving %lu", pollADC());
 			lcd_putstring(value);
 			lcd_command(LINE_TWO);
@@ -162,11 +166,42 @@ void displayLCD() {
 			lcd_putstring(value);
 			break;
 		case DONE:
+			if (current_mode == VALIDATION) {
+				if (succes) {
+					lcd_putstring("data correct");
+				} else{
+					lcd_putstring("data invalid");
+				}
+			}
+
 			sprintf(value, "data: %lu", receivedData);
 			lcd_putstring(value);
 			lcd_command(LINE_TWO);
 			sprintf(value, "samples: %lu", num_messages);
 			lcd_putstring(value);
+			break;
+	}
+}
+
+void EXTI2_3_IRQHandler(void) {
+	curr_millis = HAL_GetTick();
+	// Check if the button might be a double press
+	if (curr_millis - prev_millis < 100) {
+		HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
+		return;
+	}
+	prev_millis = HAL_GetTick();
+
+	switch (current_state) {
+		case IDLE:
+			current_state = READY;
+			current_mode = VALIDATION;
+			HAL_TIM_Base_Start_IT(&htim16);	 // Start the timer
+			break;
+		case DONE:
+			receivedData = 0;
+			current_state = IDLE;
+		default:
 			break;
 	}
 }
@@ -188,6 +223,7 @@ void EXTI0_1_IRQHandler(void) {
 	switch (current_state) {
 		case IDLE:
 			current_state = READY;
+			current_mode = TRANSMISSION;
 			HAL_TIM_Base_Start_IT(&htim16);	 // Start the timer
 			break;
 
@@ -202,30 +238,64 @@ void EXTI0_1_IRQHandler(void) {
 }
 
 void TIM16_IRQHandler(void) {
-	// ADC to LCD; TODO: Read POT1 value and write to LCD
 	flag_t bit = adc_val;
 	static uint8_t counter = 0;
-	switch (current_state) {
-		case READY:
-			if (bit == 0) {
-				current_state = RECEIVING;
-			}
-			break;
-		case RECEIVING:
-			receivedData += bit << counter;
-			counter++;
 
-			if (counter == 17)
-				current_state = DONE;
-			break;
+	if (current_mode == TRANSMISSION) {
+		switch (current_state) {
+			case READY:
+				if (bit == 0) {
+					current_state = RECEIVING;
+				}
+				break;
+			case RECEIVING:
+				receivedData += bit << counter;
+				counter++;
 
-		case DONE:
-			num_messages++;
-			counter = 0;
-			HAL_TIM_Base_Stop_IT(&htim16);
-			break;
-		default:
-			break;
+				if (counter == 17)
+					current_state = DONE;
+				break;
+
+			case DONE:
+				num_messages++;
+				counter = 0;
+				HAL_TIM_Base_Stop_IT(&htim16);
+				break;
+			default:
+				break;
+		}
+
+		/* code */
+	} else {
+		switch (current_state) {
+			case READY:
+				if (bit == 0) {
+					current_state = RECEIVING;
+				}
+				break;
+			case RECEIVING:
+				receivedData += bit << counter;
+				counter++;
+
+				if (counter == 8)
+					current_state = DONE;
+				break;
+
+			case DONE:
+				// num_messages++;
+				if (num_messages == receivedData) {
+					HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 1);
+					succes = 1;
+				} else{
+					succes = 0;
+				}
+
+				counter = 0;
+				HAL_TIM_Base_Stop_IT(&htim16);
+				break;
+			default:
+				break;
+		}
 	}
 
 	HAL_TIM_IRQHandler(&htim16);
@@ -449,8 +519,20 @@ static void MX_GPIO_Init(void) {
 	/**/
 	LL_GPIO_SetPinMode(Button0_GPIO_Port, Button0_Pin, LL_GPIO_MODE_INPUT);
 
+	LL_GPIO_SetPinPull(Button2_GPIO_Port, Button2_Pin, LL_GPIO_PULL_UP);
+
+	/**/
+	LL_GPIO_SetPinMode(Button2_GPIO_Port, Button2_Pin, LL_GPIO_MODE_INPUT);
+
 	/**/
 	EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_0;
+	EXTI_InitStruct.LineCommand = ENABLE;
+	EXTI_InitStruct.Mode = LL_EXTI_MODE_IT;
+	EXTI_InitStruct.Trigger = LL_EXTI_TRIGGER_RISING;
+	LL_EXTI_Init(&EXTI_InitStruct);
+
+	/**/
+	EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_2;
 	EXTI_InitStruct.LineCommand = ENABLE;
 	EXTI_InitStruct.Mode = LL_EXTI_MODE_IT;
 	EXTI_InitStruct.Trigger = LL_EXTI_TRIGGER_RISING;
@@ -475,20 +557,12 @@ static void MX_GPIO_Init(void) {
 	/* USER CODE BEGIN MX_GPIO_Init_2 */
 	HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
 	HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
+	HAL_NVIC_SetPriority(EXTI2_3_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(EXTI2_3_IRQn);
 	/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
-
-// void writeLCD(char* char_in) {
-// 	lcd_command(CLEAR);		 // Clear display
-// 	lcd_putstring(char_in);	 // write to display
-// }
-
-// void writeBelowLCD(char* char_in) {
-// 	lcd_command(LINE_TWO);
-// 	lcd_putstring(char_in);
-// }
 
 uint8_t readBit(void) {
 	uint32_t val = pollADC();
