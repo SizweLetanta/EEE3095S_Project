@@ -163,7 +163,7 @@ void displayLCD() {
 			sprintf(value, "data: %lu", receivedData);
 			lcd_putstring(value);
 			lcd_command(LINE_TWO);
-			sprintf(value, "msgs: %lu", num_messages);
+			sprintf(value, "samples: %lu", num_messages);
 			lcd_putstring(value);
 			break;
 	}

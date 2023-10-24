@@ -29,9 +29,16 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 typedef struct {
+	uint16_t full_data;
 	uint16_t data_remaining;
 	uint16_t bits_left;
 } DataStruct;
+
+enum state_t { IDLE,
+			   SENDING,
+			   DONE } current_state;
+enum mode_t { TRANSMISSION,
+			  VERIFICATION } current_mode;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -51,14 +58,15 @@ TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
-uint32_t prev_millis = 0;
-uint32_t curr_millis = 0;
+uint32_t prev_millis;
+uint32_t curr_millis;
 uint32_t delay_t = 500;	 // Initialise delay to 500ms
-volatile uint16_t adc_val;
+uint16_t adc_val;
 DataStruct data;
-uint8_t totalBits = 18;
+uint8_t totalBits;
 uint8_t delayT = 3;
 uint8_t transmittionStarted = 0;
+uint32_t num_samples;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -74,7 +82,9 @@ void EXTI0_1_IRQHandler(void);
 void writeLCD(char* char_in);
 uint8_t getBit(DataStruct* d);
 uint32_t pollADC(void);
-void sampleADC();
+void sampleADC(void);
+void displayLCD(void);
+void trasmitData(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -88,8 +98,9 @@ void sampleADC();
  */
 int main(void) {
 	/* USER CODE BEGIN 1 */
-	data.data_remaining = 0b1111010101010111;
-	data.bits_left = 16;
+	current_state = IDLE;
+	totalBits = 18;
+
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -113,6 +124,7 @@ int main(void) {
 	MX_TIM16_Init();
 	/* USER CODE BEGIN 2 */
 	init_LCD();
+	HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
 
 	/* USER CODE END 2 */
 
@@ -120,11 +132,12 @@ int main(void) {
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		// Toggle LED0
-		HAL_GPIO_TogglePin(GPIOB, LED7_Pin);
-		if (transmittionStarted) {
-		} else {
-			sampleADC();
-		}
+		// HAL_GPIO_TogglePin(GPIOB, LED7_Pin);
+		// if (transmittionStarted) {
+		// } else {
+		sampleADC();
+		displayLCD();
+		// }
 
 		// Wait for delay ms
 		HAL_Delay(delay_t);
@@ -135,6 +148,73 @@ int main(void) {
 }
 
 /* USER CODE BEGIN 4 */
+
+/*
+ * This function calculates the value of the decValue represented in base radValue as a
+ * char array.
+ */
+char* Dec2RadixI(int decValue, int radValue, char* output_string) {
+	// When decValue is zero, it returns "0" because 0 is 0 in any radix
+	if (!decValue) {
+		// char* output_string = malloc(2);
+		output_string[0] = '0';	 // "0"
+		output_string[1] = 0;	 // '\0'
+		return output_string;
+	}
+
+	// int min_chars = ceil(log(decValue + 1) / log(radValue));  // The minimum number of characters required to represent the value
+
+	const char characters[] = "0123456789ABCDEF";  // The characters used in representing the bases
+
+	// char* output_string = malloc(min_chars + 1);  // Get space for the digits
+	output_string += 16;  // go to the end of the array
+	*output_string = 0;	  // put a null terminator at the end of the array
+
+	while (decValue) {
+		--output_string;								   // go one byte back
+		*output_string = characters[decValue % radValue];  // put the remainder of decValue/radValue in the position
+		decValue /= radValue;							   // divide decValue by radValue
+	}
+
+	return output_string;
+}
+
+void displayLCD() {
+	char value[17];
+	lcd_command(CLEAR);
+	switch (current_state) {
+		case IDLE:
+			sprintf(value, "ADC: %lu", adc_val);
+			lcd_putstring(value);
+			lcd_command(LINE_TWO);
+			sprintf(value, "samples: %lu", num_samples);
+			lcd_putstring(value);
+			break;
+
+		case SENDING:
+			// sprintf(value, "Sending: %lu", data.full_data);
+			sprintf(value, "################");
+			Dec2RadixI(data.full_data, 2, value);
+			lcd_putstring(value);
+			lcd_command(LINE_TWO);
+			sprintf(value, "################");
+			Dec2RadixI(data.data_remaining, 2, value);
+			lcd_putstring(value);
+			break;
+		case DONE:
+			// sprintf(value, "sent %lu", data.full_data);
+			sprintf(value, "################");
+			Dec2RadixI(data.full_data, 2, value);
+			lcd_putstring(value);
+			lcd_command(LINE_TWO);
+			sprintf(value, "samples: %lu", num_samples);
+			lcd_putstring(value);
+			break;
+		default:
+			break;
+	}
+}
+
 void EXTI0_1_IRQHandler(void) {
 	// debounce step
 	curr_millis = HAL_GetTick();
@@ -142,15 +222,34 @@ void EXTI0_1_IRQHandler(void) {
 		HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
 		return;
 	}
+	prev_millis = HAL_GetTick();
 
 	// todo: Start data transmission when this is clicked
 
-	data.bits_left = 16;
-	data.data_remaining = adc_val;
-	transmittionStarted = 1;
-	HAL_TIM_Base_Start_IT(&htim16);	 // Start the timer
+	switch (current_state) {
+		case IDLE:
+			data.full_data = adc_val;
+			data.bits_left = 16;
+			data.data_remaining = data.full_data;
+			current_state = SENDING;
+			HAL_TIM_Base_Start_IT(&htim16);	 // Start the timer
+			break;
+		case DONE:
+			data.full_data = 0;
+			data.bits_left = 0;
+			data.data_remaining = 0;
+			current_state = IDLE;
+			totalBits = 18;
+			// HAL_GPIO_TogglePin(GPIOB, LED7_Pin);
+			break;
+		default:
+			break;
+	}
 
-	prev_millis = HAL_GetTick();
+	// data.bits_left = 16;
+	// data.data_remaining = adc_val;
+	// transmittionStarted = 1;
+
 	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
 }
 
@@ -170,41 +269,37 @@ uint32_t pollADC(void) {
 
 /**
  * @brief transmits a bit every tick
- * 
+ *
  */
 void TIM16_IRQHandler(void) {
-	if (delayT) {
-		HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
-		delayT--;
-		HAL_TIM_IRQHandler(&htim16);
-		return;
-	}
+	// if (delayT) {
+	// 	HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
+	// 	delayT--;
+	// 	HAL_TIM_IRQHandler(&htim16);
+	// 	return;
+	// }
 
 	trasmitData();
-	char value[9];
+	// char value[9];
 
-	sprintf(value, "%d", adc_val);  // convert to string
-	lcd_command(CLEAR);
-	lcd_putstring(value);
+	// sprintf(value, "%d", adc_val);	// convert to string
+	// lcd_command(CLEAR);
+	// lcd_putstring(value);
 
-	// adc_val = pollADC();								// Get the value of the ADC
-	sprintf(value, "%d %d", data.data_remaining, totalBits);  // convert to string
-	// writeLCD(value);										  // Write value to LCD
-	lcd_command(LINE_TWO);
-	lcd_putstring(value);
+	// // adc_val = pollADC();								// Get the value of the ADC
+	// sprintf(value, "%d %d", data.data_remaining, totalBits);  // convert to string
+	// // writeLCD(value);										  // Write value to LCD
+	// lcd_command(LINE_TWO);
+	// lcd_putstring(value);
 	HAL_TIM_IRQHandler(&htim16);
 }
 
-
 /**
- * @brief Displays the current value of the to the screen
+ * @brief Updates the value of adc_val
  *
  */
 void sampleADC() {
-	char value[5];
-	adc_val = pollADC();			 // Get the value of the ADC
-	sprintf(value, "%lu", adc_val);	 // convert to string
-	writeLCD(value);				 // Write value to LCD
+	adc_val = pollADC();  // Get the value of the ADC
 }
 
 /**
@@ -222,7 +317,7 @@ uint8_t getBit(DataStruct* d) {
 	return 0;
 }
 
-void trasmitData() {
+void trasmitData(void) {
 	switch (totalBits) {
 		case 18:
 			HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 0);
@@ -234,6 +329,8 @@ void trasmitData() {
 			break;
 		case 0:
 			HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
+			current_state = DONE;
+			num_samples++;
 			HAL_TIM_Base_Stop_IT(&htim16);
 			break;
 		default:
