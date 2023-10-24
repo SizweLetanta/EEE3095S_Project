@@ -79,12 +79,10 @@ static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 void TIM16_IRQHandler(void);
 void EXTI0_1_IRQHandler(void);
-void writeLCD(char* char_in);
 uint8_t getBit(DataStruct* d);
 uint32_t pollADC(void);
 void sampleADC(void);
 void displayLCD(void);
-void trasmitData(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -175,7 +173,10 @@ char* Dec2RadixI(int decValue, int radValue, char* output_string) {
 
 	return output_string;
 }
-
+/**
+ * @brief This function handles the LCD display for different states of the program
+ * 
+ */
 void displayLCD() {
 	char value[17];
 	lcd_command(CLEAR);
@@ -212,6 +213,10 @@ void displayLCD() {
 	}
 }
 
+/**
+ * @brief Runs when sw0 is clicked.
+ * 
+ */
 void EXTI0_1_IRQHandler(void) {
 	// debounce step
 	curr_millis = HAL_GetTick();
@@ -245,13 +250,11 @@ void EXTI0_1_IRQHandler(void) {
 	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
 }
 
-void writeLCD(char* char_in) {
-	lcd_command(CLEAR);		 // Clear display
-	lcd_putstring(char_in);	 // write to display
-							 // delay(3000);			 // Delay
-}
-
-// Get ADC value
+/**
+ * @brief Read in the value of the ADC
+ * 
+ * @return uint32_t the integer value of the ADC
+ */
 uint32_t pollADC(void) {
 	HAL_ADC_Start(&hadc);					 // Start sampling
 	uint32_t val = HAL_ADC_GetValue(&hadc);	 // Get ADC value
@@ -265,34 +268,6 @@ uint32_t pollADC(void) {
  */
 void TIM16_IRQHandler(void) {
 
-	trasmitData();
-	HAL_TIM_IRQHandler(&htim16);
-}
-
-/**
- * @brief Updates the value of adc_val
- *
- */
-void sampleADC() {
-	adc_val = pollADC();  // Get the value of the ADC
-}
-
-/**
- * @brief Remove the least significant bit from the data until there are no more bits left.
- *
- * @return uint8_t
- */
-uint8_t getBit(DataStruct* d) {
-	if (d->bits_left > 0) {
-		uint8_t bit_out = d->data_remaining % 2;
-		d->bits_left--;
-		d->data_remaining /= 2;
-		return bit_out;
-	}
-	return 0;
-}
-
-void trasmitData(void) {
 	switch (totalBits) {
 		case 18:
 			HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 0);
@@ -313,6 +288,30 @@ void trasmitData(void) {
 			totalBits--;
 			break;
 	}
+	HAL_TIM_IRQHandler(&htim16);
+}
+
+/**
+ * @brief Updates the value of adc_val
+ *
+ */
+void sampleADC() {
+	adc_val = pollADC();  // Get the value of the ADC
+}
+
+/**
+ * @brief Remove the least significant bit from the data until there are no more bits left.
+ *
+ * @return uint8_t the bit that was read
+ */
+uint8_t getBit(DataStruct* d) {
+	if (d->bits_left > 0) {
+		uint8_t bit_out = d->data_remaining % 2;
+		d->bits_left--;
+		d->data_remaining /= 2;
+		return bit_out;
+	}
+	return 0;
 }
 
 /**

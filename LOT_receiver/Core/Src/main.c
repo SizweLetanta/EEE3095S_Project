@@ -55,8 +55,8 @@ TIM_HandleTypeDef htim16;
 uint32_t prev_millis;
 uint32_t curr_millis;
 uint32_t delay_t = 500;	 // Initialise delay to 500ms
-uint32_t adc_val; // stores the bit from the ADC
-uint32_t receivedData;	// The received data is stored here
+uint32_t adc_val;		 // stores the bit from the ADC
+uint32_t receivedData;	 // The received data is stored here
 uint32_t num_messages;
 
 enum state_t { IDLE,
@@ -149,11 +149,13 @@ void displayLCD() {
 			lcd_putstring(value);
 			break;
 		case READY:
-			lcd_putstring("Waiting...");
+			sprintf(value, "waiting %lu", pollADC());
+			lcd_putstring(value);
 			break;
 		case RECEIVING:
 			// value = {48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48};
-			lcd_putstring("Receiving...");
+			sprintf(value, "receiving %lu", pollADC());
+			lcd_putstring(value);
 			lcd_command(LINE_TWO);
 			sprintf(value, "################");
 			Dec2RadixI(receivedData, 2, value);
@@ -506,7 +508,7 @@ uint32_t pollADC(void) {
 
 void ADC1_COMP_IRQHandler(void) {
 	// adc_val = HAL_ADC_GetValue(&hadc);	// read adc value
-	HAL_ADC_IRQHandler(&hadc);			// Clear flags
+	HAL_ADC_IRQHandler(&hadc);	// Clear flags
 }
 /* USER CODE END 4 */
 
