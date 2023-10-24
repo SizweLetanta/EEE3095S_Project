@@ -3,21 +3,21 @@
   <FileVersion>3.0</FileVersion>
   <Workspace>
     <WorkspaceType>Single-project</WorkspaceType>
-    <WorkspacePath>/Users/sizweletanta/School/year_4/EEE3095S/Project/EEE3095S_Project/</WorkspacePath>
+    <WorkspacePath>/Users/sizweletanta/School/year_4/EEE3095S/Project/EEE3095S_Project/LOT_receiver/</WorkspacePath>
     <underRoot>false</underRoot>
     <TrustZone>0</TrustZone>
     <HAL_Driver>/Users/sizweletanta/STM32Cube/Repository//STM32Cube_FW_F0_V1.11.4</HAL_Driver>
     <CMSIS>Drivers/CMSIS</CMSIS>
     <Toolchain>STM32CubeIDE</Toolchain>
-    <IocFile>EEE3095S_Project.ioc</IocFile>
+    <IocFile>LOT_receiver.ioc</IocFile>
     <Project>
-      <ProjectName>EEE3095S_Project</ProjectName>
+      <ProjectName>LOT_receiver</ProjectName>
       <ProjectNature>CPP</ProjectNature>
       <Secure/>
       <filestoremove/>
       <configs>
         <config>
-          <name>EEE3095S_Project</name>
+          <name>LOT_receiver</name>
           <mainSourceRepo>Core</mainSourceRepo>
           <sourceStructure>Advanced</sourceStructure>
           <device>STM32F051C6Tx</device>

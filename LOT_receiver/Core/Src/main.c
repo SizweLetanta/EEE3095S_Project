@@ -21,21 +21,23 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <math.h>
 #include <stdio.h>
 #include <lcd_stm32f0.c>
 #include "stm32f0xx.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+typedef uint8_t flag_t;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
 // The maximum ADC value that is recorded as a 0.
-#define MID_PULSE 1500
+#define MID_PULSE 1000
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -47,12 +49,21 @@
 ADC_HandleTypeDef hadc;
 
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
-uint32_t prev_millis = 0;
-uint32_t curr_millis = 0;
-uint32_t delay_t = 1000;	 // Initialise delay to 500ms
-uint32_t adc_val;
+uint32_t prev_millis;
+uint32_t curr_millis;
+uint32_t delay_t = 500;	 // Initialise delay to 500ms
+uint32_t adc_val; // stores the bit from the ADC
+uint32_t receivedData;	// The received data is stored here
+uint32_t num_messages;
+
+enum state_t { IDLE,
+			   READY,
+			   RECEIVING,
+			   DONE };
+enum state_t current_state;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -60,12 +71,16 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 void EXTI0_1_IRQHandler(void);
-void writeLCD(char* char_in);
+void TIM16_IRQHandler(void);
+char* Dec2RadixI(int decValue, int radValue, char* output_string);
+// void writeLCD(char* char_in);
 uint32_t pollADC(void);
 uint8_t readBit(void);
-// uint32_t ADCtoCCR(uint32_t adc_val);
+// void displayValue();
+void displayLCD();
 // char* startListening();
 /* USER CODE END PFP */
 
@@ -80,6 +95,10 @@ uint8_t readBit(void);
  */
 int main(void) {
 	/* USER CODE BEGIN 1 */
+	current_state = IDLE;
+	prev_millis = 0;
+	curr_millis = 0;
+	receivedData = 0;
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -100,42 +119,145 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_ADC_Init();
 	MX_TIM3_Init();
+	MX_TIM16_Init();
 	/* USER CODE BEGIN 2 */
 	init_LCD();
-
-	HAL_GPIO_TogglePin(GPIOB, LL_GPIO_PIN_0);
 
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
-		// Toggle LED0
-		HAL_GPIO_TogglePin(GPIOB, LED7_Pin);
-
-		// ADC to LCD; TODO: Read POT1 value and write to LCD
-		char value[5];
-		// adc_val = pollADC();			 // Get the value of the ADC
-		sprintf(value, "%lu", adc_val);	 // convert to string
-		writeLCD(value);				 // Write value to LCD
-
-		// Wait for delay ms
-		HAL_Delay(delay_t);
+		adc_val = readBit();
+		displayLCD();
+		HAL_Delay(500);
 		/* USER CODE END WHILE */
-
 		/* USER CODE BEGIN 3 */
 	}
 	/* USER CODE END 3 */
 }
 
-/**
- * @brief Start the protocol for listening to the data
- *
- * @return char*
- */
-// char* startListening(){
+void displayLCD() {
+	lcd_command(CLEAR);
+	char value[17];
 
-// }
+	switch (current_state) {
+		case IDLE:
+			lcd_putstring("Press sw0");
+			lcd_command(LINE_TWO);
+			sprintf(value, "msgs: %lu", num_messages);
+			lcd_putstring(value);
+			break;
+		case READY:
+			lcd_putstring("Waiting...");
+			break;
+		case RECEIVING:
+			// value = {48,48,48,48,48,48,48,48,48,48,48,48,48,48,48,48};
+			lcd_putstring("Receiving...");
+			lcd_command(LINE_TWO);
+			sprintf(value, "################");
+			Dec2RadixI(receivedData, 2, value);
+			lcd_putstring(value);
+			break;
+		case DONE:
+			sprintf(value, "data: %lu", receivedData);
+			lcd_putstring(value);
+			lcd_command(LINE_TWO);
+			sprintf(value, "msgs: %lu", num_messages);
+			lcd_putstring(value);
+			break;
+	}
+}
+
+/**
+ * @brief This code runs whenever sw0 is clicked.
+ *
+ */
+void EXTI0_1_IRQHandler(void) {
+	// TODO: Start receiving the data
+	curr_millis = HAL_GetTick();
+	// Check if the button might be a double press
+	if (curr_millis - prev_millis < 100) {
+		HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
+		return;
+	}
+	prev_millis = HAL_GetTick();
+
+	switch (current_state) {
+		case IDLE:
+			current_state = READY;
+			HAL_TIM_Base_Start_IT(&htim16);	 // Start the timer
+			break;
+
+		case DONE:
+			receivedData = 0;
+			current_state = IDLE;
+		default:
+			break;
+	}
+
+	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
+}
+
+void TIM16_IRQHandler(void) {
+	// ADC to LCD; TODO: Read POT1 value and write to LCD
+	flag_t bit = adc_val;
+	static uint8_t counter = 0;
+	switch (current_state) {
+		case READY:
+			if (bit == 0) {
+				current_state = RECEIVING;
+			}
+			break;
+		case RECEIVING:
+			receivedData += bit << counter;
+			counter++;
+
+			if (counter == 17)
+				current_state = DONE;
+			break;
+
+		case DONE:
+			num_messages++;
+			counter = 0;
+			HAL_TIM_Base_Stop_IT(&htim16);
+			break;
+		default:
+			break;
+	}
+
+	HAL_TIM_IRQHandler(&htim16);
+}
+
+/*
+ * This function calculates the value of the decValue represented in base radValue as a
+ * char array.
+ */
+char* Dec2RadixI(int decValue, int radValue, char* output_string) {
+	// When decValue is zero, it returns "0" because 0 is 0 in any radix
+	if (!decValue) {
+		// char* output_string = malloc(2);
+		output_string[0] = '0';	 // "0"
+		output_string[1] = 0;	 // '\0'
+		return output_string;
+	}
+
+	// int min_chars = ceil(log(decValue + 1) / log(radValue));  // The minimum number of characters required to represent the value
+
+	const char characters[] = "0123456789ABCDEF";  // The characters used in representing the bases
+
+	// char* output_string = malloc(min_chars + 1);  // Get space for the digits
+	output_string += 16;  // go to the end of the array
+	*output_string = 0;	  // put a null terminator at the end of the array
+
+	while (decValue) {
+		--output_string;								   // go one byte back
+		*output_string = characters[decValue % radValue];  // put the remainder of decValue/radValue in the position
+		decValue /= radValue;							   // divide decValue by radValue
+	}
+
+	return output_string;
+}
 
 /**
  * @brief System Clock Configuration
@@ -238,7 +360,6 @@ static void MX_TIM3_Init(void) {
 
 	TIM_ClockConfigTypeDef sClockSourceConfig = {0};
 	TIM_MasterConfigTypeDef sMasterConfig = {0};
-	TIM_OC_InitTypeDef sConfigOC = {0};
 
 	/* USER CODE BEGIN TIM3_Init 1 */
 
@@ -256,25 +377,43 @@ static void MX_TIM3_Init(void) {
 	if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK) {
 		Error_Handler();
 	}
-	if (HAL_TIM_PWM_Init(&htim3) != HAL_OK) {
-		Error_Handler();
-	}
 	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
 	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
 	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK) {
 		Error_Handler();
 	}
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = 0;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_3) != HAL_OK) {
-		Error_Handler();
-	}
 	/* USER CODE BEGIN TIM3_Init 2 */
 
 	/* USER CODE END TIM3_Init 2 */
-	HAL_TIM_MspPostInit(&htim3);
+}
+
+/**
+ * @brief TIM16 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_TIM16_Init(void) {
+	/* USER CODE BEGIN TIM16_Init 0 */
+
+	/* USER CODE END TIM16_Init 0 */
+
+	/* USER CODE BEGIN TIM16_Init 1 */
+
+	/* USER CODE END TIM16_Init 1 */
+	htim16.Instance = TIM16;
+	htim16.Init.Prescaler = 8000 - 1;
+	htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim16.Init.Period = 1000 - 1;
+	htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim16.Init.RepetitionCounter = 0;
+	htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+	if (HAL_TIM_Base_Init(&htim16) != HAL_OK) {
+		Error_Handler();
+	}
+	/* USER CODE BEGIN TIM16_Init 2 */
+	HAL_NVIC_SetPriority(TIM16_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(TIM16_IRQn);
+	/* USER CODE END TIM16_Init 2 */
 }
 
 /**
@@ -292,6 +431,9 @@ static void MX_GPIO_Init(void) {
 	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF);
 	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
 	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
+
+	/**/
+	LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_0);
 
 	/**/
 	LL_GPIO_ResetOutputPin(LED7_GPIO_Port, LED7_Pin);
@@ -313,6 +455,14 @@ static void MX_GPIO_Init(void) {
 	LL_EXTI_Init(&EXTI_InitStruct);
 
 	/**/
+	GPIO_InitStruct.Pin = LL_GPIO_PIN_0;
+	GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
+	GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
+	GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+	GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+	LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+	/**/
 	GPIO_InitStruct.Pin = LED7_Pin;
 	GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
 	GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
@@ -327,28 +477,19 @@ static void MX_GPIO_Init(void) {
 }
 
 /* USER CODE BEGIN 4 */
-void EXTI0_1_IRQHandler(void) {
-	// TODO: Start receiving the data
-	curr_millis = HAL_GetTick();
-	// Check if the button might be a double press
-	if (curr_millis - prev_millis < 100) {
-		HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
-		return;
-	}
 
-	prev_millis = curr_millis;
-	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
-}
+// void writeLCD(char* char_in) {
+// 	lcd_command(CLEAR);		 // Clear display
+// 	lcd_putstring(char_in);	 // write to display
+// }
 
-void writeLCD(char* char_in) {
-	lcd_command(CLEAR);		 // Clear display
-	lcd_putstring(char_in);	 // write to display
-	delay(3000);			 // Delay
-}
+// void writeBelowLCD(char* char_in) {
+// 	lcd_command(LINE_TWO);
+// 	lcd_putstring(char_in);
+// }
 
 uint8_t readBit(void) {
 	uint32_t val = pollADC();
-
 	if (val < MID_PULSE) {
 		return 0;
 	}
@@ -363,17 +504,8 @@ uint32_t pollADC(void) {
 	return val;
 }
 
-// Calculate PWM CCR value
-// uint32_t ADCtoCCR(uint32_t adc_val) {
-// 	// TODO: Calculate CCR val using an appropriate equation
-// 	float duty_cycle = ((float)adc_val) / 4095.0f;	// Percentage of time the LED is on
-// 	uint32_t val = duty_cycle * 47999;				// The CRR value
-// 	return val;
-// }
-
-
 void ADC1_COMP_IRQHandler(void) {
-	adc_val = HAL_ADC_GetValue(&hadc);	// read adc value
+	// adc_val = HAL_ADC_GetValue(&hadc);	// read adc value
 	HAL_ADC_IRQHandler(&hadc);			// Clear flags
 }
 /* USER CODE END 4 */
