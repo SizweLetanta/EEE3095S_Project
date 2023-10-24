@@ -162,11 +162,8 @@ char* Dec2RadixI(int decValue, int radValue, char* output_string) {
 		return output_string;
 	}
 
-	// int min_chars = ceil(log(decValue + 1) / log(radValue));  // The minimum number of characters required to represent the value
-
 	const char characters[] = "0123456789ABCDEF";  // The characters used in representing the bases
 
-	// char* output_string = malloc(min_chars + 1);  // Get space for the digits
 	output_string += 16;  // go to the end of the array
 	*output_string = 0;	  // put a null terminator at the end of the array
 
@@ -240,15 +237,10 @@ void EXTI0_1_IRQHandler(void) {
 			data.data_remaining = 0;
 			current_state = IDLE;
 			totalBits = 18;
-			// HAL_GPIO_TogglePin(GPIOB, LED7_Pin);
 			break;
 		default:
 			break;
 	}
-
-	// data.bits_left = 16;
-	// data.data_remaining = adc_val;
-	// transmittionStarted = 1;
 
 	HAL_GPIO_EXTI_IRQHandler(Button0_Pin);	// Clear interrupt flags
 }
@@ -272,25 +264,8 @@ uint32_t pollADC(void) {
  *
  */
 void TIM16_IRQHandler(void) {
-	// if (delayT) {
-	// 	HAL_GPIO_WritePin(LED_data_GPIO_Port, LED_data_Pin, 1);
-	// 	delayT--;
-	// 	HAL_TIM_IRQHandler(&htim16);
-	// 	return;
-	// }
 
 	trasmitData();
-	// char value[9];
-
-	// sprintf(value, "%d", adc_val);	// convert to string
-	// lcd_command(CLEAR);
-	// lcd_putstring(value);
-
-	// // adc_val = pollADC();								// Get the value of the ADC
-	// sprintf(value, "%d %d", data.data_remaining, totalBits);  // convert to string
-	// // writeLCD(value);										  // Write value to LCD
-	// lcd_command(LINE_TWO);
-	// lcd_putstring(value);
 	HAL_TIM_IRQHandler(&htim16);
 }
 
